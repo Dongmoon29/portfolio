@@ -7,6 +7,14 @@ const ThemeToggleSwitch = () => {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
+    const prefersDarkMode =
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    setTheme(prefersDarkMode ? 'dark' : 'light');
+  }, []);
+
+  useEffect(() => {
     document.querySelector('html')?.setAttribute('class', theme);
   }, [theme]);
 
@@ -24,6 +32,7 @@ const ThemeToggleSwitch = () => {
         <input
           type="checkbox"
           value="synthwave"
+          checked={theme === 'dark'}
           className="toggle theme-controller text-yellow-300 dark:text-white"
           onChange={handleThemeToggle}
         />
