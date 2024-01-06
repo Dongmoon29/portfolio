@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "DM' portfolio",
 };
 
+// TODO: need to figure out better way to handling dark / light theme toggle
 export default function RootLayout({
   children,
 }: {
