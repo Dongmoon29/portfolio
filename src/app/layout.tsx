@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/header';
+import { ThemeProvider } from '@/context/ThemeContext';
+import ThemeWrapper from '@/context/ThemeWrapper';
 
 export const metadata: Metadata = {
   title: "DM' portfolio",
 };
 
-// TODO: need to figure out better way to handling dark / light theme toggle
 export default function RootLayout({
   children,
 }: {
@@ -14,9 +15,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-gradient-to-r from-sky-200 to-sky-500 dark:from-sky-950 dark:to-orange-900 scroll-smooth">
-        <Header />
-        {children}
+      <body>
+        <ThemeProvider>
+          <ThemeWrapper>
+            <Header />
+            {children}
+          </ThemeWrapper>
+        </ThemeProvider>
       </body>
     </html>
   );

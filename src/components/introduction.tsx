@@ -2,12 +2,14 @@
 
 import Image from 'next/image';
 import Console from './console';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { ThemeContext } from '@/context/ThemeContext';
 
 const profileImages = ['/profile-removebg-preview.png', '/profile_2.png'];
 
 const Intruduction = () => {
   const [profileImageIndex, setProfileImageIndex] = useState(0);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -19,17 +21,21 @@ const Intruduction = () => {
 
   return (
     <div
-      className={
-        'relative flex-col gap-3 flex items-center justify-center max-h-screen h-screen'
-      }>
+      className={`relative flex-col gap-3 flex items-center justify-center max-h-screen h-screen bg-gradient-to-r ${
+        theme === 'light'
+          ? ' from-sky-200 to-sky-500'
+          : 'from-sky-950 to-orange-900'
+      }`}>
       <div
         className={
           'flex-col lg:flex-row gap-5 flex justify-center items-center mb-10'
         }>
         <div
-          className={
-            'bg-gradient-to-r from-yellow-100 to-pink-200 dark:from-orange-300 dark:to-orange-900 rounded-full mr-5'
-          }>
+          className={`bg-gradient-to-r ${
+            theme === 'light'
+              ? 'from-yellow-100 to-pink-200'
+              : 'from-orange-300 to-orange-900'
+          } rounded-full mr-5`}>
           <Image
             className="w-48 lg:w-96"
             src={profileImages[profileImageIndex]}
@@ -38,7 +44,10 @@ const Intruduction = () => {
             alt="profile picture"
           />
         </div>
-        <div className="p-1 flex-col w-80 lg:w-96 dark:text-white text-gray-600">
+        <div
+          className={`p-1 flex-col w-80 lg:w-96 ${
+            theme === 'dark' ? 'text-white' : 'text-gray-600'
+          } `}>
           <h1 className="text-sm lg:text-3xl font-bold mb-3 lg:mb-10">
             Hi, I&apos;m Dongmoon Software dev
           </h1>

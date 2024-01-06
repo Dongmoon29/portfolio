@@ -5,7 +5,7 @@ import Intruduction from '@/components/introduction';
 
 const Home = () => {
   return (
-    <div className={'flex flex-col'}>
+    <div>
       <Intruduction />
       <AboutMe />
       <Works />

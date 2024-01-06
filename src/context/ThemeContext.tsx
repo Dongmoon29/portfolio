@@ -4,12 +4,12 @@ import { createContext, ReactNode, useEffect, useState } from 'react';
 
 type ThemeContextType = {
   theme: 'light' | 'dark';
-  handleThemeChange: () => void;
+  handleThemeToggle: (theme: 'light' | 'dark') => void;
 };
 
 export const ThemeContext = createContext<ThemeContextType>({
   theme: 'light',
-  handleThemeChange: () => {},
+  handleThemeToggle: (theme: 'light' | 'dark') => {},
 });
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
@@ -22,13 +22,15 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     setTheme(storedTheme as 'light' | 'dark');
   }, []);
 
-  const handleThemeChange = () => {
+  const handleThemeToggle = (theme: 'light' | 'dark') => {
     setTheme(theme);
     localStorage.setItem('theme', theme);
   };
-  if (!isMounted) return <div>loading...</div>;
+
+  if (!isMounted) return null;
+
   return (
-    <ThemeContext.Provider value={{ theme, handleThemeChange }}>
+    <ThemeContext.Provider value={{ theme, handleThemeToggle }}>
       {children}
     </ThemeContext.Provider>
   );
