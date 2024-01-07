@@ -1,28 +1,35 @@
+'use client';
+
 import { FaHome, FaInfoCircle, FaBuilding, FaPhone } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import Link from 'next/link';
+import { useContext } from 'react';
+import { ThemeContext } from '@/context/ThemeContext';
 import Image from 'next/image';
 
 const Navbar = () => {
+  const { theme } = useContext(ThemeContext);
   return (
-    <>
-      <div className="flex justify-center dropdown dropdown-right sm:hidden bg-transparent">
-        <div tabIndex={0} role="button">
-          <GiHamburgerMenu className="text-black dark:text-white" />
+    <div className={`${theme === 'light' ? 'text-gray-700' : 'text-white'}`}>
+      <div className="flex justify-center dropdown dropdown-left sm:hidden">
+        <div className="flex none">
+          <div tabIndex={0} role="button">
+            <GiHamburgerMenu />
+          </div>
         </div>
         <ul
           tabIndex={0}
           className="dropdown-content z-[1] menu p-2 shadow rounded-box w-52 flex justify-center">
           <li>
-            <Link className="text-gray-300 hover:text-white py-2" href="/">
+            <Link className="py-2" href="/">
               <div className="flex gap-2 rounded-full p-2">
-                <FaHome className="text-xl lg:text-3xl" />
+                <FaHome className="text-sm lg:text-3xl" />
                 <p>Home</p>
               </div>
             </Link>
           </li>
           <li>
-            <Link className="text-gray-300 hover:text-white py-2" href="#about">
+            <Link className="py-2" href="#about">
               <div className="flex gap-2 rounded-full p-2">
                 <FaInfoCircle className="text-xl lg:text-3xl" />
                 <p>About me</p>
@@ -30,7 +37,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link className="text-gray-300 hover:text-white py-2" href="#works">
+            <Link className="py-2" href="#works">
               <div className="flex gap-2 rounded-full p-2">
                 <FaBuilding className="text-xl lg:text-3xl" />
                 <p>Works</p>
@@ -38,9 +45,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link
-              className="text-gray-300 hover:text-white py-2"
-              href="#contact">
+            <Link className="py-2" href="#contact">
               <div className="flex gap-2 rounded-full p-2">
                 <FaPhone className="text-xl lg:text-3xl" />
                 <p>Contact me</p>
@@ -50,38 +55,24 @@ const Navbar = () => {
         </ul>
       </div>
 
-      <div className="hidden sm:flex justify-center items-center gap-5">
-        <Link href="/">
-          <div className="flex items-center">
-            <div className="avatar">
-              <div className="rounded-full w-8">
-                <Image
-                  src={'/profile.jpeg'}
-                  width={20}
-                  height={20}
-                  alt="Logo"
-                />
-              </div>
-            </div>
+      <div className="hidden sm:flex justify-center items-center gap-2">
+        <Link className="py-2" href="#about">
+          <div className="rounded-full hover:scale-150 transition-transform p-2">
+            <FaInfoCircle className="text-sm lg:text-lg" />
           </div>
         </Link>
-        <Link className="text-gray-300 py-2" href="#about">
+        <Link className="py-2" href="#works">
           <div className="rounded-full hover:scale-150 transition-transform p-2">
-            <FaInfoCircle className="text-xl lg:text-3xl" />
+            <FaBuilding className="text-sm lg:text-lg" />
           </div>
         </Link>
-        <Link className="text-gray-300 py-2" href="#works">
+        <Link className="py-2" href="#contact">
           <div className="rounded-full hover:scale-150 transition-transform p-2">
-            <FaBuilding className="text-xl lg:text-3xl" />
-          </div>
-        </Link>
-        <Link className="text-gray-300 py-2" href="#contact">
-          <div className="rounded-full hover:scale-150 transition-transform p-2">
-            <FaPhone className="text-xl lg:text-3xl" />
+            <FaPhone className="text-sm lg:text-lg" />
           </div>
         </Link>
       </div>
-    </>
+    </div>
   );
 };
 
