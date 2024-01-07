@@ -1,6 +1,5 @@
-import Image from 'next/image';
 import { FC } from 'react';
-import Skills from './skills';
+import VsCodeComponent from './vscode';
 
 type Skill = {
   Languages: Language;
@@ -35,18 +34,13 @@ const skills = {
   ],
 };
 
+// implement vscode look alike component
 const AboutMe: FC = () => {
   return (
     <section
       id="aboutMe"
-      className="p-16 flex gap-32 bg-gradient-to-r from-green-50 to-green-200 dark:from-orange-950 dark:to-orange-900 scroll-smooth">
-      <div className="rounded-full overflow-hidden">
-        <Image src="/dongmoon_kim.jpg" width={500} height={500} alt="profile" />
-      </div>
-      <div>
-        <div>Skills</div>
-        <Skills skills={skills.programmings} />
-      </div>
+      className={`p-16 flex justify-center items-center gap-32 h-screen max-h-screen scroll-smooth `}>
+      <VsCodeComponent />
     </section>
   );
 };
