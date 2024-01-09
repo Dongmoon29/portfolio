@@ -18,7 +18,7 @@ const Console = () => {
     <div
       className={`rounded-xl ${
         theme === 'light' ? 'bg-gray-100' : 'bg-gray-800'
-      }  w-full sm:w-3/5 h-96`}>
+      } w-full sm:w-3/5 h-96`}>
       <div className="flex bg-gray-600 min-h-8 rounded-t-xl p-2 gap-2">
         <OsxWindowButtons />
       </div>
@@ -27,7 +27,7 @@ const Console = () => {
           <pre>{asciiDog}</pre>
         </div>
         <div
-          className={`relative m-auto ${
+          className={`m-auto ${
             theme === 'light' ? 'text-gray-700' : 'text-gray-200'
           } text-sm text-left h-50 w-150`}>
           <span>$ {text}</span>

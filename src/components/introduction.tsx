@@ -20,12 +20,13 @@ const Intruduction = () => {
   }, []);
 
   return (
-    <div
+    <section
       className={`flex-col gap-3 p-7 flex items-center justify-center max-h-screen h-screen bg-gradient-to-r ${
         theme === 'light'
           ? ' from-sky-200 to-sky-500'
           : 'from-sky-950 to-orange-900'
-      }`}>
+      }`}
+      id="introduction">
       <div
         className={
           'flex-col lg:flex-row gap-5 flex justify-center items-center mb-10'
@@ -60,7 +61,7 @@ const Intruduction = () => {
         </div>
       </div>
       <Console />
-    </div>
+    </section>
   );
 };
 

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import VsCodeComponent from './vscode';
+import VsCodeComponent from './vscode/vscode';
 import { VscodeProvider } from '@/context/VscodeContext';
 
 type Skill = {

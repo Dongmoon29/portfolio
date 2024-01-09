@@ -39,6 +39,36 @@ const file1: VsCodeFileType = {
       { "id": "HTML", "level": 5 },
       { "id": "Git", "level": 5 }
     ]
+  },
+  "mobile": {
+    "ko-kr": {
+      "callingCode": "45",
+      "number": "81 65 59 23"
+    },
+    "da-dk": {
+      "callingCode": "82",
+      "number": "10-5519-2783"
+    }
+  },
+  "email": "ehdans04@gmail.com",
+  "currentBasedOn": {
+    "country": "Denmark",
+    "city": "Copenhagen"
+  },
+  "skills": {
+    "languages": [
+      { "id": "Korean", "proficiency": "native" },
+      { "id": "English", "proficiency": "professional" }
+    ],
+    "programmings": [
+      { "id": "JavaScript", "level": 5 },
+      { "id": "Typescript", "level": 5 },
+      { "id": "ReactJS", "level": 5 },
+      { "id": "NextJS", "level": 5 },
+      { "id": "CSS", "level": 5 },
+      { "id": "HTML", "level": 5 },
+      { "id": "Git", "level": 5 }
+    ]
   }
 }
   `,
@@ -63,11 +93,9 @@ const file2: VsCodeFileType = {
 const file3: VsCodeFileType = {
   id: uuidv4(),
   filename: 'something.json',
-  content: `
-  {
-    "name": "dongmoon
-  }
-  `,
+  content: `  {
+    "name": "dongmoon"
+  }`,
   path: '/test2/test.json',
   fileType: 'file',
   isActive: false,
