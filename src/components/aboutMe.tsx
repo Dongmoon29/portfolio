@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import VsCodeComponent from './vscode';
+import { VscodeProvider } from '@/context/VscodeContext';
 
 type Skill = {
   Languages: Language;
@@ -40,7 +41,9 @@ const AboutMe: FC = () => {
     <section
       id="aboutMe"
       className={`p-16 flex justify-center items-center gap-32 h-screen max-h-screen scroll-smooth `}>
-      <VsCodeComponent />
+      <VscodeProvider>
+        <VsCodeComponent />
+      </VscodeProvider>
     </section>
   );
 };
