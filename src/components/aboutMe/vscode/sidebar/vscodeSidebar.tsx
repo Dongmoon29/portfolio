@@ -9,6 +9,7 @@ export const VscodeSidebar: FC = () => {
   const { state } = useContext(VscodeContext);
   return (
     <div className="flex flex-col gap-2 w-1/5 p-5 bg-gray-200 rounded-bl-xl">
+      <h1 className="text-sm text-nowrap truncate">EXPLORER: PORTFOLIO</h1>
       {state.fileExplorer.map((folder) => (
         <VsCodeFolder key={`FOLDER_${folder.id}`} folder={folder} />
       ))}
