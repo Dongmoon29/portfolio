@@ -52,7 +52,7 @@ const file2: VsCodeFileType = {
   filename: 'test.json',
   content: `
   {
-    "test": "test
+    "test": "test"
   }
   `,
   path: '/test/test.json',
@@ -191,6 +191,9 @@ export const vscodeReducer = (state = initialState, action: any) => {
           }),
         };
       });
+
+      // ToDO
+      // const newCurrentfile = state.buffers.find(buffer => )
 
       return {
         ...state,

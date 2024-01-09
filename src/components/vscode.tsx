@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, MouseEvent, useContext, useEffect, useId, useState } from 'react';
+import { FC, MouseEvent, useContext, useId } from 'react';
 import { FaFile, FaFolder, FaFolderOpen, FaReact } from 'react-icons/fa';
 import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io';
 import { OsxWindowButtons } from './osxWindowButtons';
@@ -18,7 +18,6 @@ const VsCodeComponent: FC = () => {
           <OsxWindowButtons />
         </div>
         <div className="flex justify-center">
-          {/* handle null case */}
           <h1>{state.currentFile?.filename ?? 'vscode'}</h1>
         </div>
         <div></div>
@@ -131,7 +130,6 @@ type VsCodeFolderProps = {
 };
 
 const VsCodeFolder: FC<VsCodeFolderProps> = ({ folder }) => {
-  console.log('folder ===>', folder);
   const { dispatch } = useContext(VscodeContext);
   const id = useId();
   const handleToggle = (event: MouseEvent) => {
