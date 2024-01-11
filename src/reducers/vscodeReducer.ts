@@ -144,7 +144,6 @@ export const initialState: VsCodeState = {
   fileExplorer: [folder, folder2, file3, file4],
 };
 
-// this need to refactor
 export const vscodeReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case 'SET_CURRENT_FILE': {
@@ -217,31 +216,53 @@ export const vscodeReducer = (state = initialState, action: any) => {
     }
 
     case 'DELETE_BUFFER': {
-      const newBuffers = state.buffers.filter(
+      let newBuffers = state.buffers.filter(
         (buffer) => buffer.id !== action.payload.id
       );
+
+      let newCurrentFile = state.currentFile;
+
+      if (state.currentFile && state.currentFile.id === action.payload.id) {
+        newCurrentFile =
+          newBuffers.length > 0
+            ? state.files.find((file) => file.id === newBuffers[0].id)
+            : undefined;
+      }
+
       const folders = state.fileExplorer.filter(
         (folder) => folder.fileType === 'folder'
       ) as VsCodeFolderType[];
+      const newFileExplorer = folders.map((folder) => ({
+        ...folder,
+        files: folder.files.map((file) => ({
+          ...file,
+          isActive: file.id === newCurrentFile?.id,
+        })),
+        isActive: folder.isActive
+          ? true
+          : folder.files.some((file) => file.id === newCurrentFile?.id),
+      }));
 
-      const newFileExplorer = folders.map((folder) => {
-        return {
-          ...folder,
-          files: folder.files.map((file) => {
+      if (newCurrentFile !== undefined) {
+        newBuffers = newBuffers.map((buffer) => {
+          if (buffer.id === newCurrentFile!.id) {
             return {
-              ...file,
+              ...buffer,
+              isActive: true,
+            };
+          } else {
+            return {
+              ...buffer,
               isActive: false,
             };
-          }),
-        };
-      });
-
-      // TODO need to implement delete buffer changes currentFile
-      // const newCurrentfile = state.buffers.find(buffer => )
+          }
+        });
+      }
 
       return {
         ...state,
         buffers: newBuffers,
+        currentFile: newCurrentFile,
         fileExplorer: newFileExplorer,
       };
     }
