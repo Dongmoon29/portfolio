@@ -40,13 +40,13 @@ export const Modal: FC<ModalProps> = ({ isOpen, onClose, children }) => {
       onClick={handleOverlayClick}>
       <div
         onClick={handleContentClick}
-        className="gap-20 text-black p-5 sm:p-20 absolute flex flex-col items-center w-full h-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-sky-100  rounded-xl shadow">
+        className="gap-20 text-black p-5 xl:p-20 absolute flex flex-col items-center w-full h-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-sky-100  rounded-xl shadow">
         <div>Search Component will be here</div>
         <div className="flex flex-col items-start w-full gap-10 px-10 md:px-20">
           <h1 className="font-semibold text-xl">Links</h1>
           <nav className="flex w-full">
-            <ul className="flex flex-col sm:flex-row flex-wrap items-center w-full gap-3">
-              <li className="w-1/2 gap-2 flex items-center">
+            <ul className="grid grid-cols-1 lg:grid-cols-2 gap-3 w-full">
+              <li className=" gap-2 flex items-center">
                 <Image
                   src="/svgs/profile_4.svg"
                   width={30}
@@ -56,7 +56,7 @@ export const Modal: FC<ModalProps> = ({ isOpen, onClose, children }) => {
                 />
                 <Link href="/introduction">introduction</Link>
               </li>
-              <li className="w-1/2 gap-2 flex items-center justify-center">
+              <li className="gap-2 flex items-center">
                 <Image
                   src="/svgs/aboutme.svg"
                   width={30}
