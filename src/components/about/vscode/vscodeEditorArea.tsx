@@ -31,7 +31,7 @@ export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ content }) => {
             <div
               className={`${
                 theme === 'dark' ? 'bg-black' : 'bg-gray-50'
-              } w-14 text-center text-sm`}
+              } w-14 text-center`}
               key={index}>
               {index + 1}
             </div>
@@ -41,7 +41,7 @@ export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ content }) => {
           <textarea
             className={`${
               theme === 'dark' ? 'bg-black' : 'bg-gray-50'
-            } w-full h-full text-sm resize-none focus:outline-none overflow-hidden`}
+            } w-full h-full resize-none focus:outline-none overflow-hidden text-nowrap overflow-x-auto`}
             value={currentContents}
             onChange={handleInputChange}
           />

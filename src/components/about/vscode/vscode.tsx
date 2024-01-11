@@ -22,10 +22,10 @@ const VsCodeComponent: FC = () => {
         theme === 'dark' ? 'text-white' : 'text-black'
       } rounded-t-xl h-full w-full rounded-b-xl`}>
       {os === 'MacOs' ? (
-        <OsxWindowHeader title="vscode" />
+        <OsxWindowHeader title="editor" />
       ) : (
         <WindowHeader
-          title="vscode"
+          title="editor"
           icon={
             <Image
               src={'/svgs/vscode.svg'}
@@ -37,7 +37,7 @@ const VsCodeComponent: FC = () => {
           }
         />
       )}
-      <div className="flex flex-col overflow-hidden h-full w-full">
+      <div className="flex flex-col overflow-hidden h-full w-full text-xs md:text-sm">
         <div className="flex flex-1 min-h-0">
           <VscodeSidebar />
           <div
