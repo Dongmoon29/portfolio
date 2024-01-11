@@ -1,15 +1,16 @@
+import { OsContext } from '@/context/OsContext';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, useContext, useEffect, useRef } from 'react';
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  children: React.ReactNode;
 }
 
-export const Modal: FC<ModalProps> = ({ isOpen, onClose, children }) => {
+export const Modal: FC<ModalProps> = ({ isOpen, onClose }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const { os, handleOsToggle } = useContext(OsContext);
 
   useEffect(() => {
     if (isOpen) {
@@ -40,8 +41,68 @@ export const Modal: FC<ModalProps> = ({ isOpen, onClose, children }) => {
       onClick={handleOverlayClick}>
       <div
         onClick={handleContentClick}
-        className="gap-20 text-black p-5 xl:p-20 absolute flex flex-col items-center w-full h-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-sky-100  rounded-xl shadow">
+        className="gap-20 text-black p-5 xl:p-20 absolute flex flex-col items-center justify-center w-full h-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-sky-100  rounded-xl shadow">
         <div>Search Component will be here</div>
+        <div className="flex flex-col items-start w-full gap-10 px-10 md:px-20">
+          <h1 className="font-semibold text-xl">Recommend</h1>
+          <nav className="flex w-full">
+            <ul className="grid grid-cols-1 lg:grid-cols-2 gap-3 w-full">
+              <li className=" gap-2 flex items-center">
+                <Image
+                  src="/svgs/resume.svg"
+                  width={30}
+                  height={30}
+                  priority
+                  alt="profile.svg"
+                />
+                <span>Download Resume</span>
+              </li>
+              <li className="gap-2 flex items-center">
+                <Image
+                  src="/svgs/email.svg"
+                  width={30}
+                  height={30}
+                  priority
+                  alt="profile.svg"
+                />
+                <Link href="/about">Send email to dongmoon</Link>
+              </li>
+              <div className="dropdown dropdown-bottom">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="gap-2 flex items-center dropdown dropdown-bottom">
+                  <Image
+                    src={
+                      os === 'Window' ? '/svgs/macos.svg' : '/svgs/windows.svg'
+                    }
+                    width={30}
+                    height={30}
+                    priority
+                    alt="profile.svg"
+                  />
+                  Change OS
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content z-[1] menu p-2 rounded-box w-52">
+                    <li
+                      onClick={
+                        os === 'MacOs'
+                          ? () => handleOsToggle('Window')
+                          : () => handleOsToggle('MacOs')
+                      }>
+                      <a>
+                        {os === 'MacOs'
+                          ? 'Change to Window'
+                          : 'Change to MacOS'}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </ul>
+          </nav>
+        </div>
         <div className="flex flex-col items-start w-full gap-10 px-10 md:px-20">
           <h1 className="font-semibold text-xl">Links</h1>
           <nav className="flex w-full">

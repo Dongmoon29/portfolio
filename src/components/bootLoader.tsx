@@ -24,6 +24,8 @@ export const BootLoader = () => {
     window.location.href = '/introduction';
   });
 
+  console.log(currentSelectedOs);
+
   return (
     <div className="bg-black text-white font-mono text-xl w-screen h-screen flex flex-col justify-center items-center">
       <h1 className="text-center">Bootloader</h1>
@@ -32,6 +34,10 @@ export const BootLoader = () => {
           {osS.map((os, index) => {
             return (
               <li
+                // onMouseEnter={() => handleOsToggle(os as any)}
+                onClick={() => {
+                  window.location.href = '/introduction';
+                }}
                 key={`OS_${index}`}
                 className={`cursor-pointer hover:bg-gray-700 p-2 ${
                   currentSelectedOs === os ? 'bg-gray-700' : ''
