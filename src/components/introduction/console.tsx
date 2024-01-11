@@ -12,7 +12,7 @@ o'')}____//
  \`_/      )
  (_(_/-(_/
 `;
-const Console = () => {
+export const Console = () => {
   const text = useTypingEffect();
   const { theme } = useContext(ThemeContext);
   const { os } = useContext(OsContext);
@@ -41,5 +41,3 @@ const Console = () => {
     </div>
   );
 };
-
-export default Console;

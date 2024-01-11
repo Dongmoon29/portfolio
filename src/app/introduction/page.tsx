@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '@/context/ThemeContext';
-import Console from '@/components/console';
+import { Console } from '@/components/introduction/console';
 import { OsContext } from '@/context/OsContext';
 import { OsxMenuBar } from '@/components/os/macOs/osxMenuBar';
 import { WindowMenuBar } from '@/components/os/windowOs/windowMenuBar';
