@@ -34,7 +34,7 @@ export const BootLoader = () => {
           {osS.map((os, index) => {
             return (
               <li
-                // onMouseEnter={() => handleOsToggle(os as any)}
+                onMouseEnter={() => handleOsToggle(os as 'Window' | 'MacOs')}
                 onClick={() => {
                   window.location.href = '/introduction';
                 }}

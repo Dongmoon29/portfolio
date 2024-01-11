@@ -5,7 +5,7 @@ import { ThemeProvider } from '@/context/ThemeContext';
 import ThemeWrapper from '@/context/ThemeWrapper';
 import { OsProvider } from '@/context/OsContext';
 
-const languages = ['en', 'de'];
+const languages = ['en', 'kr'];
 
 export async function generateStaticParams() {
   return languages.map((lng) => ({ lng }));
@@ -22,8 +22,9 @@ export default function RootLayout({
   children: React.ReactNode;
   params: { lng: string };
 }) {
+  // lng is not working
   return (
-    <html lang={lng} dir={dir(lng)}>
+    <html lang={'en'}>
       <body>
         <ThemeProvider>
           <ThemeWrapper>
