@@ -1,5 +1,6 @@
 'use client';
 
+import { OsContext } from '@/context/OsContext';
 import { ThemeContext } from '@/context/ThemeContext';
 import Link from 'next/link';
 import { useContext } from 'react';
@@ -9,14 +10,29 @@ import { IoMdMoon } from 'react-icons/io';
 
 export const OsxMenuBar = () => {
   const { theme, handleThemeToggle } = useContext(ThemeContext);
+  const { os, handleOsToggle } = useContext(OsContext);
+
+  const newOs = os === 'MacOs' ? 'Window' : 'MacOs';
+
   return (
     <div
       className={`flex items-center ${
         theme === 'dark' ? 'bg-gray-400' : 'bg-gray-200'
       } text-black w-full px-3 py-1`}>
-      <div className="mr-5">
-        <FaApple />
+      <div className="dropdown">
+        <div tabIndex={0} role="button" className="mr-5">
+          <FaApple />
+        </div>
+
+        <ul
+          tabIndex={0}
+          className="dropdown-content z-[1] menu p-5 shadow bg-gray-300 rounded-box w-52">
+          <li onClick={() => handleOsToggle(newOs)}>
+            <a>Change to {newOs}</a>
+          </li>
+        </ul>
       </div>
+
       <div className="flex gap-5">
         <div>
           <span className="font-semibold">Dongmoon Kim</span>
