@@ -2,9 +2,9 @@
 import { ThemeContext } from '@/context/ThemeContext';
 import { useTypingEffect } from '@/hooks/useTyping';
 import { useContext } from 'react';
-import { OsxWindowHeader } from './os/macOs/osxWindowHeader';
+import { OsxWindowHeader } from '../os/macOs/osxWindowHeader';
 import { OsContext } from '@/context/OsContext';
-import { WindowHeader } from './os/windowOs/windowHeader';
+import { WindowHeader } from '../os/windowOs/windowHeader';
 
 const asciiDog = `
   __      _
