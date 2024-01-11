@@ -25,7 +25,7 @@ const Intruduction = () => {
 
   return (
     <section
-      className={`relative flex-col pb-10 gap-9 flex items-center max-h-screen h-screen bg-gradient-to-r ${
+      className={`relative flex-col pb-32 lg:pb-10 gap-9 flex items-center max-h-screen h-screen bg-gradient-to-r ${
         theme === 'light'
           ? ' from-sky-200 to-sky-500'
           : 'from-sky-950 to-orange-900'
