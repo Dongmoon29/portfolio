@@ -1,3 +1,6 @@
+'use client';
+
+import { ThemeContext } from '@/context/ThemeContext';
 import { VscodeContext } from '@/context/VscodeContext';
 import Image from 'next/image';
 import { FC, MouseEventHandler, useContext } from 'react';
@@ -31,6 +34,7 @@ type VsCodeBufferProps = {
 
 const VsCodeBuffer: FC<VsCodeBufferProps> = ({ buffer }) => {
   const { dispatch } = useContext(VscodeContext);
+  const { theme } = useContext(ThemeContext);
 
   let icon = (
     <div>
@@ -83,8 +87,12 @@ const VsCodeBuffer: FC<VsCodeBufferProps> = ({ buffer }) => {
   return (
     <div
       onClick={handleTabClick}
-      className={` cursor-pointer flex gap-x-3 p-3 justify-center items-center ${
-        buffer.isActive ? 'bg-gray-100 border-t-4 border-blue-500' : ''
+      className={`cursor-pointer flex gap-x-3 p-3 justify-center items-center ${
+        buffer.isActive
+          ? theme === 'light'
+            ? 'border-t-4 border-blue-500 bg-gray-50'
+            : 'border-t-4 border-blue-500 bg-black'
+          : ''
       }
       `}>
       {icon}

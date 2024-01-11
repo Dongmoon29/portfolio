@@ -2,7 +2,9 @@
 import { ThemeContext } from '@/context/ThemeContext';
 import { useTypingEffect } from '@/hooks/useTyping';
 import { useContext } from 'react';
-import { OsxWindowButtons } from './osxWindowButtons';
+import { OsxWindowHeader } from './os/macOs/osxWindowHeader';
+import { OsContext } from '@/context/OsContext';
+import { WindowHeader } from './os/windowOs/windowHeader';
 
 const asciiDog = `
   __      _
@@ -13,15 +15,18 @@ o'')}____//
 const Console = () => {
   const text = useTypingEffect();
   const { theme } = useContext(ThemeContext);
+  const { os } = useContext(OsContext);
 
   return (
     <div
       className={`rounded-xl ${
         theme === 'light' ? 'bg-gray-100' : 'bg-gray-800'
-      } w-full sm:w-3/5 h-96`}>
-      <div className="flex bg-gray-600 min-h-8 rounded-t-xl p-2 gap-2">
-        <OsxWindowButtons />
-      </div>
+      } w-4/5 md:w-2/5 h-60 md:h-96`}>
+      {os === 'MacOs' ? (
+        <OsxWindowHeader title="terminal" />
+      ) : (
+        <WindowHeader title="terminal" />
+      )}
       <div className="rounded-b-xl p-3 pb-1 min-h-60">
         <div className="text-center mb-5">
           <pre>{asciiDog}</pre>

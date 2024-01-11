@@ -123,14 +123,14 @@ export type VsCodeState = {
   files: VsCodeFileStorage;
   currentFile?: VsCodeFileType;
   buffers: { id: string; filename: string; isActive: boolean }[];
-  fileExplorer: VsCodeFolderType[];
+  fileExplorer: (VsCodeFolderType | VsCodeFileType)[];
 };
 
 export const initialState: VsCodeState = {
   files: [file1, file2, file3],
   currentFile: file1,
   buffers: [{ filename: file1.filename, isActive: true, id: file1.id }],
-  fileExplorer: [folder, folder2],
+  fileExplorer: [folder, folder2, file3],
 };
 
 // this need to refactor
@@ -175,8 +175,10 @@ export const vscodeReducer = (state = initialState, action: any) => {
           },
         ];
       }
-
-      const newFileExplorer = state.fileExplorer.map((folder) => {
+      const folders = state.fileExplorer.filter(
+        (folder) => folder.fileType === 'folder'
+      ) as VsCodeFolderType[];
+      const newFileExplorer = folders.map((folder) => {
         let isFolderActive = false;
 
         const updatedFiles = folder.files.map((file) => {
@@ -207,8 +209,11 @@ export const vscodeReducer = (state = initialState, action: any) => {
       const newBuffers = state.buffers.filter(
         (buffer) => buffer.id !== action.payload.id
       );
+      const folders = state.fileExplorer.filter(
+        (folder) => folder.fileType === 'folder'
+      ) as VsCodeFolderType[];
 
-      const newFileExplorer = state.fileExplorer.map((folder) => {
+      const newFileExplorer = folders.map((folder) => {
         return {
           ...folder,
           files: folder.files.map((file) => {
@@ -220,7 +225,7 @@ export const vscodeReducer = (state = initialState, action: any) => {
         };
       });
 
-      // ToDO
+      // TODO need to implement delete buffer changes currentFile
       // const newCurrentfile = state.buffers.find(buffer => )
 
       return {

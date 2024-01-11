@@ -1,15 +1,19 @@
 'use client';
 
 import Image from 'next/image';
-import Console from './console';
 import { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '@/context/ThemeContext';
+import Console from '@/components/console';
+import { OsContext } from '@/context/OsContext';
+import { OsxMenuBar } from '@/components/os/macOs/osxMenuBar';
+import { WindowMenuBar } from '@/components/os/windowOs/windowMenuBar';
 
 const profileImages = ['/profile-removebg-preview.png', '/profile_2.png'];
 
 const Intruduction = () => {
   const [profileImageIndex, setProfileImageIndex] = useState(0);
   const { theme } = useContext(ThemeContext);
+  const { os } = useContext(OsContext);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -21,12 +25,13 @@ const Intruduction = () => {
 
   return (
     <section
-      className={`flex-col gap-3 p-7 flex items-center justify-center max-h-screen h-screen bg-gradient-to-r ${
+      className={`relative flex-col pb-10 gap-9 flex items-center max-h-screen h-screen bg-gradient-to-r ${
         theme === 'light'
           ? ' from-sky-200 to-sky-500'
           : 'from-sky-950 to-orange-900'
-      }`}
+      } snap-start ${os === 'MacOs' ? '' : 'pt-20'}`}
       id="introduction">
+      {os === 'MacOs' ? <OsxMenuBar /> : null}
       <div
         className={
           'flex-col lg:flex-row gap-5 flex justify-center items-center mb-10'
@@ -37,12 +42,13 @@ const Intruduction = () => {
               ? 'from-yellow-100 to-pink-200'
               : 'from-orange-300 to-orange-900'
           } rounded-full lg:mr-5`}>
-          <div className="w-80">
+          <div className="w-60">
             <Image
               src={profileImages[profileImageIndex]}
               width={400}
               height={400}
               alt="profile picture"
+              priority
             />
           </div>
         </div>
@@ -61,6 +67,7 @@ const Intruduction = () => {
         </div>
       </div>
       <Console />
+      {os === 'Window' && <WindowMenuBar />}
     </section>
   );
 };

@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import Header from '@/components/header';
 import { ThemeProvider } from '@/context/ThemeContext';
 import ThemeWrapper from '@/context/ThemeWrapper';
+import { OsProvider } from '@/context/OsContext';
 
 export const metadata: Metadata = {
-  title: "DM' portfolio",
+  title: "DM's portfolio",
 };
 
 export default function RootLayout({
@@ -18,8 +18,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <ThemeWrapper>
-            {/* <Header /> */}
-            {children}
+            <OsProvider>{children}</OsProvider>
           </ThemeWrapper>
         </ThemeProvider>
       </body>

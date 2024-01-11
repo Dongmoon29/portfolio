@@ -1,4 +1,6 @@
 'use client';
+
+import { ThemeContext } from '@/context/ThemeContext';
 import { VscodeContext } from '@/context/VscodeContext';
 import { VsCodeFileType, VsCodeFolderType } from '@/types/vscodeTypes';
 import Image from 'next/image';
@@ -7,12 +9,30 @@ import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io';
 
 export const VscodeSidebar: FC = () => {
   const { state } = useContext(VscodeContext);
+  const { theme } = useContext(ThemeContext);
+  const folders: VsCodeFolderType[] = state.fileExplorer.filter(
+    (file) => file.fileType === 'folder'
+  ) as VsCodeFolderType[];
+  const files: VsCodeFileType[] = state.fileExplorer.filter(
+    (file) => file.fileType === 'file'
+  ) as VsCodeFileType[];
+
   return (
-    <div className="flex flex-col gap-2 w-1/5 p-5 bg-gray-200 rounded-bl-xl">
+    <div
+      className={`flex flex-col gap-2 w-1/5 p-5 ${
+        theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'
+      }`}>
       <h1 className="text-sm text-nowrap truncate">EXPLORER: PORTFOLIO</h1>
-      {state.fileExplorer.map((folder) => (
-        <VsCodeFolder key={`FOLDER_${folder.id}`} folder={folder} />
-      ))}
+      {folders
+        ? folders.map((folder) => (
+            <VsCodeFolder key={`FOLDER_${folder.id}`} folder={folder} />
+          ))
+        : null}
+      {files
+        ? files.map((file) => (
+            <VsCodeFile key={`File_${file.id}`} file={file} />
+          ))
+        : null}
     </div>
   );
 };
@@ -74,6 +94,7 @@ type VsCodeFileProps = {
 
 const VsCodeFile: FC<VsCodeFileProps> = ({ file }) => {
   const { dispatch } = useContext(VscodeContext);
+  const { theme } = useContext(ThemeContext);
 
   const handleFileClick = (event: any) => {
     event.stopPropagation();
@@ -84,50 +105,29 @@ const VsCodeFile: FC<VsCodeFileProps> = ({ file }) => {
   };
 
   const getIcon = (filename: string) => {
-    let icon = (
+    const iconMap: Record<string, string> = {
+      '.json': '/svgs/json.svg',
+      '.tsx': '/svgs/tsx.svg',
+    };
+
+    const fileExtension = filename.substring(filename.lastIndexOf('.'));
+    const iconSrc = iconMap[fileExtension] || '/svgs/default_file.svg';
+
+    return (
       <div>
-        <Image
-          src={'/svgs/default_file.svg'}
-          priority
-          height={16}
-          width={16}
-          alt="icon"
-        />
+        <Image src={iconSrc} priority height={16} width={16} alt="icon" />
       </div>
     );
-    if (filename.endsWith('.json')) {
-      icon = (
-        <div>
-          <Image
-            src={'/svgs/json.svg'}
-            priority
-            height={16}
-            width={16}
-            alt="icon"
-          />
-        </div>
-      );
-    }
-    if (filename.endsWith('.tsx')) {
-      icon = (
-        <div>
-          <Image
-            src={'/svgs/tsx.svg'}
-            priority
-            height={16}
-            width={16}
-            alt="icon"
-          />
-        </div>
-      );
-    }
-    return icon;
   };
 
   return (
     <div
       className={`flex items-center gap-2 pl-12 cursor-pointer ${
-        file.isActive ? 'bg-gray-300' : ''
+        file.isActive
+          ? theme === 'dark'
+            ? 'border-2 border-white'
+            : 'bg-gray-100'
+          : ''
       } `}
       onClick={handleFileClick}>
       <span>{getIcon(file.filename)}</span>
