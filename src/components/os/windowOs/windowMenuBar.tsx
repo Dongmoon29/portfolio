@@ -6,7 +6,6 @@ import { Modal } from './windowModal';
 
 export const WindowMenuBar = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  console.log('modalOpen', modalOpen);
 
   const openModal = () => {
     setModalOpen(true);
