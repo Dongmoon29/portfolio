@@ -19,7 +19,7 @@ export const VscodeSidebar: FC = () => {
 
   return (
     <div
-      className={`flex flex-col gap-2 w-1/5 p-5 ${
+      className={`hidden md:flex flex-col gap-2 md:w-1/5 p-5 ${
         theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'
       }`}>
       <h1 className="text-sm text-nowrap truncate">EXPLORER: PORTFOLIO</h1>
