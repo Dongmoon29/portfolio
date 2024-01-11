@@ -101,6 +101,17 @@ const file3: VsCodeFileType = {
   isActive: false,
 };
 
+const file4: VsCodeFileType = {
+  id: uuidv4(),
+  filename: 'helloWorld.json',
+  content: `  {
+    "greeting": "helloWorld"
+  }`,
+  path: '/helloWorld.json',
+  fileType: 'file',
+  isActive: false,
+};
+
 const folder: VsCodeFolderType = {
   id: uuidv4(),
   isActive: true,
@@ -127,10 +138,10 @@ export type VsCodeState = {
 };
 
 export const initialState: VsCodeState = {
-  files: [file1, file2, file3],
+  files: [file1, file2, file3, file4],
   currentFile: file1,
   buffers: [{ filename: file1.filename, isActive: true, id: file1.id }],
-  fileExplorer: [folder, folder2, file3],
+  fileExplorer: [folder, folder2, file3, file4],
 };
 
 // this need to refactor

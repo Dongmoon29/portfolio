@@ -47,7 +47,7 @@ export const Modal: FC<ModalProps> = ({ isOpen, onClose }) => {
           <h1 className="font-semibold text-xl">Recommend</h1>
           <nav className="flex w-full">
             <ul className="grid grid-cols-1 lg:grid-cols-2 gap-3 w-full">
-              <li className=" gap-2 flex items-center">
+              <li className=" gap-2 flex items-center text-sm">
                 <Image
                   src="/svgs/resume.svg"
                   width={30}
@@ -57,7 +57,7 @@ export const Modal: FC<ModalProps> = ({ isOpen, onClose }) => {
                 />
                 <span>Download Resume</span>
               </li>
-              <li className="gap-2 flex items-center">
+              <li className="gap-2 flex items-center text-sm">
                 <Image
                   src="/svgs/email.svg"
                   width={30}
@@ -65,13 +65,13 @@ export const Modal: FC<ModalProps> = ({ isOpen, onClose }) => {
                   priority
                   alt="profile.svg"
                 />
-                <Link href="/about">Send email to dongmoon</Link>
+                <Link href="/about">Send email</Link>
               </li>
               <div className="dropdown dropdown-bottom">
                 <div
                   tabIndex={0}
                   role="button"
-                  className="gap-2 flex items-center dropdown dropdown-bottom">
+                  className="gap-2 flex items-center dropdown dropdown-bottom text-sm">
                   <Image
                     src={
                       os === 'Window' ? '/svgs/macos.svg' : '/svgs/windows.svg'
