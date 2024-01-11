@@ -37,13 +37,13 @@ const VsCodeComponent: FC = () => {
           }
         />
       )}
-      <div className="flex flex-col overflow-auto h-full w-full">
+      <div className="flex flex-col overflow-hidden h-full w-full">
         <div className="flex flex-1 min-h-0">
           <VscodeSidebar />
           <div
             className={`flex flex-col flex-1 w-full ${
               theme === 'dark' ? 'bg-gray-800' : 'bg-gray-200'
-            } overflow-auto`}>
+            }`}>
             <VsCodeBuffers />
             <VsCodeEditorArea
               content={state.currentFile?.content ?? 'Pick a file'}
