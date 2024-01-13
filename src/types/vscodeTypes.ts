@@ -18,9 +18,3 @@ export type VsCodeFileType = {
 };
 
 export type VsCodeFileStorage = VsCodeFileType[];
-
-export type VsCodeState = {
-  currentFile: VsCodeFileType;
-  buffers: { id: string; filename: string; isActive: boolean }[];
-  fileExplorer: VsCodeFolderType[] | VsCodeFileType[];
-};

@@ -1,19 +1,19 @@
 'use client';
 
-import { ThemeContext } from '@/context/ThemeContext';
-import { VscodeContext } from '@/context/VscodeContext';
-import Image from 'next/image';
-import { FC, MouseEventHandler, useContext } from 'react';
+import { FileIcon } from '@/components/fileIcons/icons';
+import { useThemeContext } from '@/context/ThemeContext';
+import { useVscodeContext } from '@/context/VscodeContext';
+import { FC, MouseEventHandler } from 'react';
 
 export const VsCodeBuffers: FC = () => {
-  const { state } = useContext(VscodeContext);
+  const { state } = useVscodeContext();
   const buffers = state.buffers;
   if (!buffers) {
     return null;
   }
 
   return (
-    <div className="flex justify-start items-end">
+    <div className="flex justify-start items-end overflow-auto w-full">
       {buffers.map((buffer) => (
         <VsCodeBuffer
           key={`TAB_${buffer.filename}_${buffer.id}`}
@@ -33,46 +33,8 @@ type VsCodeBufferProps = {
 };
 
 const VsCodeBuffer: FC<VsCodeBufferProps> = ({ buffer }) => {
-  const { dispatch } = useContext(VscodeContext);
-  const { theme } = useContext(ThemeContext);
-
-  let icon = (
-    <div>
-      <Image
-        src={'/svgs/default_file.svg'}
-        priority
-        height={32}
-        width={32}
-        alt="icon"
-      />
-    </div>
-  );
-  if (buffer.filename.endsWith('.json')) {
-    icon = (
-      <div>
-        <Image
-          src={'/svgs/json.svg'}
-          priority
-          height={32}
-          width={32}
-          alt="icon"
-        />
-      </div>
-    );
-  }
-  if (buffer.filename.endsWith('.tsx')) {
-    icon = (
-      <div>
-        <Image
-          src={'/svgs/tsx.svg'}
-          priority
-          height={32}
-          width={32}
-          alt="icon"
-        />
-      </div>
-    );
-  }
+  const { dispatch } = useVscodeContext();
+  const { theme } = useThemeContext();
 
   const handleTabDeleteClick: MouseEventHandler<HTMLElement> = (event) => {
     event.stopPropagation();
@@ -94,9 +56,10 @@ const VsCodeBuffer: FC<VsCodeBufferProps> = ({ buffer }) => {
             : 'border-t-4 border-blue-500 bg-black'
           : ''
       }
+      
       `}>
-      {icon}
-      <span>{buffer.filename}</span>
+      <FileIcon filename={buffer.filename} size={20} />
+      <span className="text-nowrap">{buffer.filename}</span>
       <span onClick={handleTabDeleteClick}>x</span>
     </div>
   );

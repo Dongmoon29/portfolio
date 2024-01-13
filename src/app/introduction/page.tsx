@@ -1,10 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import { useContext, useEffect, useState } from 'react';
-import { ThemeContext } from '@/context/ThemeContext';
+import { useEffect, useState } from 'react';
+import { useThemeContext } from '@/context/ThemeContext';
 import { Console } from '@/components/introduction/console';
-import { OsContext } from '@/context/OsContext';
+import { useOsContext } from '@/context/OsContext';
 import { OsxMenuBar } from '@/components/os/macOs/osxMenuBar';
 import { WindowMenuBar } from '@/components/os/windowOs/windowMenuBar';
 
@@ -12,8 +12,8 @@ const profileImages = ['/profile-removebg-preview.png', '/profile_2.png'];
 
 const Intruduction = () => {
   const [profileImageIndex, setProfileImageIndex] = useState(0);
-  const { theme } = useContext(ThemeContext);
-  const { os } = useContext(OsContext);
+  const { theme } = useThemeContext();
+  const { os } = useOsContext();
 
   useEffect(() => {
     const interval = setInterval(() => {

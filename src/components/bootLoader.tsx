@@ -1,13 +1,13 @@
 'use client';
 
-import { OsContext } from '@/context/OsContext';
-import { useContext, useState } from 'react';
+import { useOsContext } from '@/context/OsContext';
+import { useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 
 const osS = ['MacOs', 'Window'];
 
 export const BootLoader = () => {
-  const { os: storedOs, handleOsToggle } = useContext(OsContext);
+  const { os: storedOs, handleOsToggle } = useOsContext();
   const [currentSelectedOs, setCurrentSelectedOs] = useState<
     'MacOs' | 'Window'
   >(storedOs);

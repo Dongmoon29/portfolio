@@ -1,6 +1,12 @@
 'use client';
 
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 type OsContextType = {
   os: 'MacOs' | 'Window';
@@ -34,4 +40,12 @@ export const OsProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </OsContext.Provider>
   );
+};
+
+export const useOsContext = () => {
+  const context = useContext(OsContext);
+  if (!context) {
+    throw new Error('useOsContext must be used within a VscodeProvider');
+  }
+  return context;
 };

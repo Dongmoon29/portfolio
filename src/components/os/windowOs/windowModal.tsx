@@ -1,7 +1,7 @@
-import { OsContext } from '@/context/OsContext';
+import { useOsContext } from '@/context/OsContext';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { FC, useContext, useEffect, useRef } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 
 interface ModalProps {
   isOpen: boolean;
@@ -10,7 +10,7 @@ interface ModalProps {
 
 export const Modal: FC<ModalProps> = ({ isOpen, onClose }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const { os, handleOsToggle } = useContext(OsContext);
+  const { os, handleOsToggle } = useOsContext();
 
   useEffect(() => {
     if (isOpen) {

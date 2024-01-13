@@ -1,16 +1,15 @@
 'use client';
 
-import { OsContext } from '@/context/OsContext';
-import { ThemeContext } from '@/context/ThemeContext';
+import { useOsContext } from '@/context/OsContext';
+import { useThemeContext } from '@/context/ThemeContext';
 import Link from 'next/link';
-import { useContext } from 'react';
 import { FaApple } from 'react-icons/fa';
 import { IoMdSunny } from 'react-icons/io';
 import { IoMdMoon } from 'react-icons/io';
 
 export const OsxMenuBar = () => {
-  const { theme, handleThemeToggle } = useContext(ThemeContext);
-  const { os, handleOsToggle } = useContext(OsContext);
+  const { theme, handleThemeToggle } = useThemeContext();
+  const { os, handleOsToggle } = useOsContext();
 
   const newOs = os === 'MacOs' ? 'Window' : 'MacOs';
 

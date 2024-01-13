@@ -3,14 +3,30 @@
 import VsCodeComponent from '@/components/about/vscode/vscode';
 import { OsxMenuBar } from '@/components/os/macOs/osxMenuBar';
 import { WindowMenuBar } from '@/components/os/windowOs/windowMenuBar';
-import { OsContext } from '@/context/OsContext';
-import { ThemeContext } from '@/context/ThemeContext';
+import { useOsContext } from '@/context/OsContext';
+import { useThemeContext } from '@/context/ThemeContext';
 import { VscodeProvider } from '@/context/VscodeContext';
-import { FC, useContext } from 'react';
+import { FC, useEffect } from 'react';
 
 const AboutMe: FC = () => {
-  const { theme } = useContext(ThemeContext);
-  const { os } = useContext(OsContext);
+  const { theme } = useThemeContext();
+  const { os } = useOsContext();
+
+  useEffect(() => {
+    const ping = async () => {
+      try {
+        const response = await fetch('/api/datas');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const res = await response.json();
+      } catch (error: any) {
+        console.error('Fetching error:', error.message);
+      }
+    };
+
+    ping();
+  }, []);
   return (
     <div
       id="aboutMe"

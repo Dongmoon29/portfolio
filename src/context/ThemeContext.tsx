@@ -1,6 +1,12 @@
 'use client';
 
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 type ThemeContextType = {
   theme: 'light' | 'dark';
@@ -27,11 +33,19 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem('theme', theme);
   };
 
-  if (!isMounted) return null;
+  if (!isMounted) return <div>...loading</div>;
 
   return (
     <ThemeContext.Provider value={{ theme, handleThemeToggle }}>
       {children}
     </ThemeContext.Provider>
   );
+};
+
+export const useThemeContext = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error('useThemeContext must be used within a VscodeProvider');
+  }
+  return context;
 };

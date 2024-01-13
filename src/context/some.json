@@ -1,0 +1,50 @@
+{
+  "data": [
+    {
+      "id": "263fd94e-7e8d-43b5-8f8a-68117a35c71a",
+      "filename": "test.json",
+      "content": "{\n  \"test\": \"test\"\n}\n",
+      "path": "/test.json",
+      "fileType": "file",
+      "isActive": false
+    },
+
+    {
+      "id": "69da7d1c-649c-406a-b91b-56969a84b3f8",
+      "foldername": "about",
+      "path": "/about",
+      "fileType": "folder",
+      "isActive": false,
+      "files": [
+        {
+          "id": "5802f765-f90a-43fc-a9ae-e2b755cb3f70",
+          "filename": "about.json",
+          "content": "{\n  \"mobile\": {\n    \"ko-kr\": {\n      \"callingCode\": \"45\",\n      \"number\": \"81 65 59 23\"\n    },\n    \"da-dk\": {\n      \"callingCode\": \"82\",\n      \"number\": \"10-5519-2783\"\n    }\n  },\n  \"email\": \"ehdans04@gmail.com\",\n  \"currentBasedOn\": {\n    \"country\": \"Denmark\",\n    \"city\": \"Copenhagen\"\n  },\n  \"skills\": {\n    \"languages\": [\n      { \"id\": \"Korean\", \"proficiency\": \"native\" },\n      { \"id\": \"English\", \"proficiency\": \"professional\" }\n    ],\n    \"programmings\": [\n      { \"id\": \"JavaScript\", \"level\": 5 },\n      { \"id\": \"Typescript\", \"level\": 5 },\n      { \"id\": \"ReactJS\", \"level\": 5 },\n      { \"id\": \"NextJS\", \"level\": 5 },\n      { \"id\": \"CSS\", \"level\": 5 },\n      { \"id\": \"HTML\", \"level\": 5 },\n      { \"id\": \"Git\", \"level\": 5 }\n    ]\n  }\n}\n",
+          "path": "/about/about.json",
+          "fileType": "file",
+          "isActive": false
+        }
+      ],
+      "folders": [
+        {
+          "id": "970fa66f-a777-4ef2-8f6b-178215e21146",
+          "foldername": "skills",
+          "path": "/about/skills",
+          "fileType": "folder",
+          "isActive": false,
+          "files": [
+            {
+              "id": "afb510e2-e235-4069-8685-1a97c239201f",
+              "filename": "skills.json",
+              "content": "{\n  \"test\": \"test\"\n}\n",
+              "path": "/about/skills/skills.json",
+              "fileType": "file",
+              "isActive": false
+            }
+          ],
+          "folders": []
+        }
+      ]
+    }
+  ]
+}

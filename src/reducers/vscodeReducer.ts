@@ -1,284 +1,128 @@
-import {
-  VsCodeFileStorage,
-  VsCodeFileType,
-  VsCodeFolderType,
-} from '@/types/vscodeTypes';
-import { v4 as uuidv4 } from 'uuid';
+import { initialState } from '@/context/VscodeContext';
+import { VsCodeFileType, VsCodeFolderType } from '@/types/vscodeTypes';
 
-const file1: VsCodeFileType = {
-  id: uuidv4(),
-  filename: 'about.json',
-  content: `
-  {
-  "mobile": {
-    "ko-kr": {
-      "callingCode": "45",
-      "number": "81 65 59 23"
-    },
-    "da-dk": {
-      "callingCode": "82",
-      "number": "10-5519-2783"
-    }
-  },
-  "email": "ehdans04@gmail.com",
-  "currentBasedOn": {
-    "country": "Denmark",
-    "city": "Copenhagen"
-  },
-  "skills": {
-    "languages": [
-      { "id": "Korean", "proficiency": "native" },
-      { "id": "English", "proficiency": "professional" }
-    ],
-    "programmings": [
-      { "id": "JavaScript", "level": 5 },
-      { "id": "Typescript", "level": 5 },
-      { "id": "ReactJS", "level": 5 },
-      { "id": "NextJS", "level": 5 },
-      { "id": "CSS", "level": 5 },
-      { "id": "HTML", "level": 5 },
-      { "id": "Git", "level": 5 }
-    ]
-  },
-  "mobile": {
-    "ko-kr": {
-      "callingCode": "45",
-      "number": "81 65 59 23"
-    },
-    "da-dk": {
-      "callingCode": "82",
-      "number": "10-5519-2783"
-    }
-  },
-  "email": "ehdans04@gmail.com",
-  "currentBasedOn": {
-    "country": "Denmark",
-    "city": "Copenhagen"
-  },
-  "skills": {
-    "languages": [
-      { "id": "Korean", "proficiency": "native" },
-      { "id": "English", "proficiency": "professional" }
-    ],
-    "programmings": [
-      { "id": "JavaScript", "level": 5 },
-      { "id": "Typescript", "level": 5 },
-      { "id": "ReactJS", "level": 5 },
-      { "id": "NextJS", "level": 5 },
-      { "id": "CSS", "level": 5 },
-      { "id": "HTML", "level": 5 },
-      { "id": "Git", "level": 5 }
-    ]
-  }
-}
-  `,
-  path: '/test/about.json',
-  fileType: 'file',
-  isActive: true,
-};
-
-const file2: VsCodeFileType = {
-  id: uuidv4(),
-  filename: 'test.json',
-  content: `
-  {
-    "test": "test"
-  }
-  `,
-  path: '/test/test.json',
-  fileType: 'file',
-  isActive: false,
-};
-
-const file3: VsCodeFileType = {
-  id: uuidv4(),
-  filename: 'something.json',
-  content: `  {
-    "name": "dongmoon"
-  }`,
-  path: '/test2/test.json',
-  fileType: 'file',
-  isActive: false,
-};
-
-const file4: VsCodeFileType = {
-  id: uuidv4(),
-  filename: 'helloWorld.json',
-  content: `  {
-    "greeting": "helloWorld"
-  }`,
-  path: '/helloWorld.json',
-  fileType: 'file',
-  isActive: false,
-};
-
-const folder: VsCodeFolderType = {
-  id: uuidv4(),
-  isActive: true,
-  foldername: 'test',
-  files: [file1, file2],
-  path: '/test',
-  fileType: 'folder',
-};
-
-const folder2: VsCodeFolderType = {
-  id: uuidv4(),
-  isActive: false,
-  foldername: 'test2',
-  files: [file3],
-  path: '/test2',
-  fileType: 'folder',
-};
-
-export type VsCodeState = {
-  files: VsCodeFileStorage;
-  currentFile?: VsCodeFileType;
-  buffers: { id: string; filename: string; isActive: boolean }[];
-  fileExplorer: (VsCodeFolderType | VsCodeFileType)[];
-};
-
-export const initialState: VsCodeState = {
-  files: [file1, file2, file3, file4],
-  currentFile: file1,
-  buffers: [{ filename: file1.filename, isActive: true, id: file1.id }],
-  fileExplorer: [folder, folder2, file3, file4],
-};
-
-export const vscodeReducer = (state = initialState, action: any) => {
-  switch (action.type) {
-    case 'SET_CURRENT_FILE': {
-      const newCurrentFile = state.files.find(
-        (file) => file.id === action.payload.id
-      );
-      const existFileBuffer = state.buffers.find(
-        (buffer) => buffer.id === action.payload.id
-      );
-
-      let newBuffers = state.buffers;
-
-      if (existFileBuffer) {
-        newBuffers = state.buffers.map((buffer) => {
-          if (buffer.id === existFileBuffer.id) {
-            return {
-              ...buffer,
-              isActive: true,
-            };
-          } else {
-            return {
-              ...buffer,
-              isActive: false,
-            };
-          }
-        });
-      } else {
-        newBuffers = [
-          ...state.buffers.map((buffer) => {
-            return {
-              ...buffer,
-              isActive: false,
-            };
-          }),
-          {
-            filename: newCurrentFile!.filename,
-            isActive: true,
-            id: newCurrentFile!.id,
-          },
-        ];
-      }
-      const folders = state.fileExplorer.filter(
-        (folder) => folder.fileType === 'folder'
-      ) as VsCodeFolderType[];
-      const newFileExplorer = folders.map((folder) => {
-        let isFolderActive = false;
-
-        const updatedFiles = folder.files.map((file) => {
-          if (file.id === action.payload.id) {
-            isFolderActive = true;
-            return { ...file, isActive: true };
-          } else {
-            return { ...file, isActive: false };
-          }
-        });
-
-        return {
-          ...folder,
-          files: updatedFiles,
-          isActive: folder.isActive ? true : isFolderActive,
-        };
-      });
-
+const updateIsActive = (
+  items: Array<VsCodeFileType | VsCodeFolderType>,
+  id: string
+): (VsCodeFileType | VsCodeFolderType)[] => {
+  return items.map((item: VsCodeFileType | VsCodeFolderType) => {
+    if (item.fileType === 'folder') {
       return {
-        ...state,
-        currentFile: newCurrentFile,
-        buffers: newBuffers,
-        fileExplorer: newFileExplorer,
+        ...item,
+        folders: item.folders ? updateIsActive(item.folders, id) : item.folders,
+        files: item.files.map((file) => ({
+          ...file,
+          isActive: file.id === id,
+        })),
       };
     }
 
+    return {
+      ...item,
+      isActive: item.id === id,
+    };
+  });
+};
+
+const toggleFolder: VsCodeFolderType[] = (
+  folders: VsCodeFolderType[],
+  targetId: string
+) => {
+  return folders.map((folder) => ({
+    ...folder,
+    isActive: folder.id === targetId ? !folder.isActive : folder.isActive,
+    folders: folder.folders
+      ? toggleFolder(folder.folders, targetId)
+      : folder.folders,
+  }));
+};
+
+const getInitialCurrentFile = (
+  files?: VsCodeFileType[],
+  folders: VsCodeFolderType[]
+) => {
+  if (files?.length) return files[0];
+  if (folders?.length)
+    return getInitialCurrentFile(folders[0].files, undefined);
+  return null;
+};
+
+const collectFiles = (folders) =>
+  folders.reduce(
+    (allFiles, folder) => [
+      ...allFiles,
+      ...folder.files,
+      ...(folder.folders ? collectFiles(folder.folders) : []),
+    ],
+    []
+  );
+
+const setFileStore = (files = [], folders = []) => [
+  ...files,
+  ...collectFiles(folders),
+];
+
+export const vscodeReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'INITIALIZE': {
+      const { files, folders } = action.payload.data;
+      const currentFile = getInitialCurrentFile(files, folders);
+      return {
+        ...state,
+        currentFile,
+        buffers: [currentFile],
+        fileExplorer: action.payload.data,
+        files: setFileStore(files, folders),
+      };
+    }
+    case 'SET_CURRENT_FILE': {
+      const fileId = action.payload.id;
+      const newCurrentFile = state.files.find((file) => file.id === fileId);
+      const updatedBuffers = state.buffers.map((buffer) => ({
+        ...buffer,
+        isActive: buffer.id === fileId,
+      }));
+      return {
+        ...state,
+        currentFile: newCurrentFile,
+        buffers: state.buffers.some((buffer) => buffer.id === fileId)
+          ? updatedBuffers
+          : [...updatedBuffers, { ...newCurrentFile, isActive: true }],
+        fileExplorer: {
+          ...state.fileExplorer,
+          files: updateIsActive(state.fileExplorer.files, fileId),
+          folders: updateIsActive(state.fileExplorer.folders, fileId),
+        },
+      };
+    }
     case 'DELETE_BUFFER': {
-      let newBuffers = state.buffers.filter(
+      const newBuffers = state.buffers.filter(
         (buffer) => buffer.id !== action.payload.id
       );
-
-      let newCurrentFile = state.currentFile;
-
-      if (state.currentFile && state.currentFile.id === action.payload.id) {
-        newCurrentFile =
-          newBuffers.length > 0
-            ? state.files.find((file) => file.id === newBuffers[0].id)
-            : undefined;
-      }
-
-      const folders = state.fileExplorer.filter(
-        (folder) => folder.fileType === 'folder'
-      ) as VsCodeFolderType[];
-      const newFileExplorer = folders.map((folder) => ({
-        ...folder,
-        files: folder.files.map((file) => ({
-          ...file,
-          isActive: file.id === newCurrentFile?.id,
-        })),
-        isActive: folder.isActive
-          ? true
-          : folder.files.some((file) => file.id === newCurrentFile?.id),
-      }));
-
-      if (newCurrentFile !== undefined) {
-        newBuffers = newBuffers.map((buffer) => {
-          if (buffer.id === newCurrentFile!.id) {
-            return {
-              ...buffer,
-              isActive: true,
-            };
-          } else {
-            return {
-              ...buffer,
-              isActive: false,
-            };
-          }
-        });
-      }
+      const newCurrentFile =
+        newBuffers.length > 0
+          ? state.files.find((file) => file.id === newBuffers[0].id)
+          : null;
 
       return {
         ...state,
-        buffers: newBuffers,
+        buffers: newCurrentFile
+          ? newBuffers.map((buffer) => ({
+              ...buffer,
+              isActive: buffer.id === newCurrentFile.id,
+            }))
+          : newBuffers,
         currentFile: newCurrentFile,
-        fileExplorer: newFileExplorer,
       };
     }
     case 'TOGGLE_FOLDER': {
-      const newFileExplorer = state.fileExplorer.map((folder) => {
-        if (folder.id === action.payload.id) {
-          return {
-            ...folder,
-            isActive: !folder.isActive,
-          };
-        }
-        return {
-          ...folder,
-        };
-      });
-      return { ...state, fileExplorer: newFileExplorer };
+      return {
+        ...state,
+        fileExplorer: {
+          ...state.fileExplorer,
+          folders: toggleFolder(state.fileExplorer.folders, action.payload.id),
+        },
+      };
     }
     default:
       return state;

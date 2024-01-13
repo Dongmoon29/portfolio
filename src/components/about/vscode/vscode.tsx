@@ -1,20 +1,20 @@
 'use client';
 
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { OsxWindowHeader } from '../../os/macOs/osxWindowHeader';
-import { VscodeContext } from '@/context/VscodeContext';
+import { useVscodeContext } from '@/context/VscodeContext';
 import { VsCodeBuffers } from './vscodeBuffers';
 import { VsCodeEditorArea } from './vscodeEditorArea';
 import { VscodeSidebar } from './sidebar/vscodeSidebar';
-import { OsContext } from '@/context/OsContext';
+import { useOsContext } from '@/context/OsContext';
 import Image from 'next/image';
-import { ThemeContext } from '@/context/ThemeContext';
+import { useThemeContext } from '@/context/ThemeContext';
 import { WindowHeader } from '@/components/os/windowOs/windowHeader';
 
 const VsCodeComponent: FC = () => {
-  const { state } = useContext(VscodeContext);
-  const { os } = useContext(OsContext);
-  const { theme } = useContext(ThemeContext);
+  const { state } = useVscodeContext();
+  const { os } = useOsContext();
+  const { theme } = useThemeContext();
 
   return (
     <div
@@ -45,9 +45,7 @@ const VsCodeComponent: FC = () => {
               theme === 'dark' ? 'bg-gray-800' : 'bg-gray-200'
             }`}>
             <VsCodeBuffers />
-            <VsCodeEditorArea
-              content={state.currentFile?.content ?? 'Pick a file'}
-            />
+            <VsCodeEditorArea content={state.currentFile?.content} />
           </div>
         </div>
       </div>

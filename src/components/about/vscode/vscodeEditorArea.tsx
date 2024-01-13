@@ -1,14 +1,14 @@
 'use client';
 
-import { ThemeContext } from '@/context/ThemeContext';
-import { FC, useContext, useState, ChangeEvent, useEffect } from 'react';
+import { useThemeContext } from '@/context/ThemeContext';
+import { FC, useState, ChangeEvent, useEffect } from 'react';
 
 type VsCodeEditorAreaProps = {
   content?: string;
 };
 
 export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ content }) => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useThemeContext();
   const [currentContents, setCurrentContents] = useState(content ?? '');
   const lines = currentContents.split('\n');
 

@@ -1,9 +1,8 @@
 'use client';
-import { ThemeContext } from '@/context/ThemeContext';
+import { useThemeContext } from '@/context/ThemeContext';
 import { useTypingEffect } from '@/hooks/useTyping';
-import { useContext } from 'react';
 import { OsxWindowHeader } from '../os/macOs/osxWindowHeader';
-import { OsContext } from '@/context/OsContext';
+import { useOsContext } from '@/context/OsContext';
 import { WindowHeader } from '../os/windowOs/windowHeader';
 
 const asciiDog = `
@@ -14,8 +13,8 @@ o'')}____//
 `;
 export const Console = () => {
   const text = useTypingEffect();
-  const { theme } = useContext(ThemeContext);
-  const { os } = useContext(OsContext);
+  const { theme } = useThemeContext();
+  const { os } = useOsContext();
 
   return (
     <div

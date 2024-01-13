@@ -1,21 +1,17 @@
 'use client';
 
-import { ThemeContext } from '@/context/ThemeContext';
-import { VscodeContext } from '@/context/VscodeContext';
+import { FileIcon, FolderIcon } from '@/components/fileIcons/icons';
+import { useThemeContext } from '@/context/ThemeContext';
+import { VscodeContext, useVscodeContext } from '@/context/VscodeContext';
 import { VsCodeFileType, VsCodeFolderType } from '@/types/vscodeTypes';
-import Image from 'next/image';
 import { FC, MouseEventHandler, useContext, useId } from 'react';
 import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io';
 
 export const VscodeSidebar: FC = () => {
   const { state } = useContext(VscodeContext);
-  const { theme } = useContext(ThemeContext);
-  const folders: VsCodeFolderType[] = state.fileExplorer.filter(
-    (file) => file.fileType === 'folder'
-  ) as VsCodeFolderType[];
-  const files: VsCodeFileType[] = state.fileExplorer.filter(
-    (file) => file.fileType === 'file'
-  ) as VsCodeFileType[];
+  const { theme } = useThemeContext();
+  const folders = state.fileExplorer?.folders;
+  const files = state.fileExplorer?.files;
 
   return (
     <div
@@ -23,65 +19,73 @@ export const VscodeSidebar: FC = () => {
         theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'
       }`}>
       <h1 className="text-sm text-nowrap truncate">EXPLORER: PORTFOLIO</h1>
-      {folders
-        ? folders.map((folder) => (
-            <VsCodeFolder key={`FOLDER_${folder.id}`} folder={folder} />
-          ))
-        : null}
-      {files
-        ? files.map((file) => (
-            <VsCodeFile key={`File_${file.id}`} file={file} />
-          ))
-        : null}
+      <div>
+        {folders
+          ? folders.map((folder) => (
+              <VsCodeFolder
+                key={`FOLDER_${folder.id}`}
+                folder={folder}
+                level={1}
+              />
+            ))
+          : null}
+        {files
+          ? files.map((file) => (
+              <VsCodeFile key={`File_${file.id}`} file={file} level={1} />
+            ))
+          : null}
+      </div>
     </div>
   );
 };
 
 type VsCodeFolderProps = {
   folder: VsCodeFolderType;
+  level: number;
 };
 
-const VsCodeFolder: FC<VsCodeFolderProps> = ({ folder }) => {
-  const { dispatch } = useContext(VscodeContext);
+const VsCodeFolder: FC<VsCodeFolderProps> = ({ folder, level }) => {
+  const { dispatch } = useVscodeContext();
   const id = useId();
   const handleToggle: MouseEventHandler<HTMLElement> = (event) => {
     event.stopPropagation();
     dispatch({ type: 'TOGGLE_FOLDER', payload: { id: folder.id } });
   };
 
+  const padding = `${(level - 1) * 3}`;
+
   return (
-    <div className="cursor-pointer" onClick={handleToggle}>
-      <div className="flex items-center gap-2 pl-3 min-w-64">
+    <div className={`cursor-pointer pl-${padding} py-1`} onClick={handleToggle}>
+      <div className="flex items-center gap-2 min-w-64">
         {folder.isActive ? (
           <div className="flex justify-center items-center">
             <IoIosArrowDown />
-            <Image
-              src={'/svgs/default_folder_opened.svg'}
-              priority
-              height={16}
-              width={16}
-              alt="icon"
-            />
+            <FolderIcon isOpen />
           </div>
         ) : (
           <div className="flex justify-center items-center">
             <IoIosArrowForward />
-            <div>
-              <Image
-                src={'/svgs/default_folder.svg'}
-                priority
-                height={16}
-                width={16}
-                alt="icon"
-              />
-            </div>
+            <FolderIcon />
           </div>
         )}
         <span className="truncate">{folder.foldername}</span>
       </div>
+      {folder.isActive && folder.folders
+        ? folder.folders.map((folder) => (
+            <VsCodeFolder
+              key={`${folder.id}_${id}`}
+              folder={folder}
+              level={level + 1}
+            />
+          ))
+        : null}
       {folder.isActive
         ? folder.files.map((file) => (
-            <VsCodeFile key={`${file.filename}_${id}`} file={file} />
+            <VsCodeFile
+              key={`${file.filename}_${id}`}
+              file={file}
+              level={level + 1}
+            />
           ))
         : null}
     </div>
@@ -90,11 +94,12 @@ const VsCodeFolder: FC<VsCodeFolderProps> = ({ folder }) => {
 
 type VsCodeFileProps = {
   file: VsCodeFileType;
+  level: number;
 };
 
-const VsCodeFile: FC<VsCodeFileProps> = ({ file }) => {
-  const { dispatch } = useContext(VscodeContext);
-  const { theme } = useContext(ThemeContext);
+const VsCodeFile: FC<VsCodeFileProps> = ({ file, level }) => {
+  const { dispatch } = useVscodeContext();
+  const { theme } = useThemeContext();
 
   const handleFileClick = (event: any) => {
     event.stopPropagation();
@@ -104,25 +109,11 @@ const VsCodeFile: FC<VsCodeFileProps> = ({ file }) => {
     });
   };
 
-  const getIcon = (filename: string) => {
-    const iconMap: Record<string, string> = {
-      '.json': '/svgs/json.svg',
-      '.tsx': '/svgs/tsx.svg',
-    };
-
-    const fileExtension = filename.substring(filename.lastIndexOf('.'));
-    const iconSrc = iconMap[fileExtension] || '/svgs/default_file.svg';
-
-    return (
-      <div>
-        <Image src={iconSrc} priority height={16} width={16} alt="icon" />
-      </div>
-    );
-  };
+  const paddingLeft = `${(level - 1) * 3}`;
 
   return (
     <div
-      className={`flex items-center gap-2 pl-12 cursor-pointer ${
+      className={`flex items-center gap-2 pl-${paddingLeft} cursor-pointer ${
         file.isActive
           ? theme === 'dark'
             ? 'border-2 border-white'
@@ -130,7 +121,7 @@ const VsCodeFile: FC<VsCodeFileProps> = ({ file }) => {
           : ''
       } `}
       onClick={handleFileClick}>
-      <span>{getIcon(file.filename)}</span>
+      <span>{<FileIcon filename={file.filename} size={16} />}</span>
       <span className="truncate">{file.filename}</span>
     </div>
   );
