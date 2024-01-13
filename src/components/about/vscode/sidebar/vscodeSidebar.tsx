@@ -52,13 +52,17 @@ const VsCodeFolder: FC<VsCodeFolderProps> = ({ folder, level }) => {
     dispatch({ type: 'TOGGLE_FOLDER', payload: { id: folder.id } });
   };
 
-  const padding = `${(level - 1) * 3}`;
+  const padding = `${(level - 1) * 10}`;
+  console.log(padding);
 
   return (
-    <div className={`cursor-pointer pl-${padding} py-1`} onClick={handleToggle}>
+    <div
+      className={`cursor-pointer py-1`}
+      style={{ paddingLeft: `${padding}px` }}
+      onClick={handleToggle}>
       <div className="flex items-center gap-2 min-w-64">
         {folder.isActive ? (
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center gap-2">
             <IoIosArrowDown />
             <FolderIcon isOpen />
           </div>
@@ -109,17 +113,20 @@ const VsCodeFile: FC<VsCodeFileProps> = ({ file, level }) => {
     });
   };
 
-  const paddingLeft = `${(level - 1) * 3}`;
+  const padding = `${(level - 1) * 10}`;
 
   return (
     <div
-      className={`flex items-center gap-2 pl-${paddingLeft} cursor-pointer ${
+      className={`flex items-center gap-2 cursor-pointer ${
         file.isActive
           ? theme === 'dark'
             ? 'border-2 border-white'
             : 'bg-gray-100'
           : ''
-      } `}
+      } 
+      
+      `}
+      style={{ paddingLeft: `${padding}px` }}
       onClick={handleFileClick}>
       <span>{<FileIcon filename={file.filename} size={16} />}</span>
       <span className="truncate">{file.filename}</span>
