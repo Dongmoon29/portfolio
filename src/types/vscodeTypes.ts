@@ -11,7 +11,7 @@ export type VsCodeFolderType = {
 export type VsCodeFileType = {
   id: string;
   filename: string;
-  content: string;
+  content: string | { src: string };
   path: string;
   fileType: 'file';
   isActive: boolean;

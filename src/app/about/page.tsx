@@ -12,21 +12,6 @@ const AboutMe: FC = () => {
   const { theme } = useThemeContext();
   const { os } = useOsContext();
 
-  useEffect(() => {
-    const ping = async () => {
-      try {
-        const response = await fetch('/api/datas');
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const res = await response.json();
-      } catch (error: any) {
-        console.error('Fetching error:', error.message);
-      }
-    };
-
-    ping();
-  }, []);
   return (
     <div
       id="aboutMe"

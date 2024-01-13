@@ -29,15 +29,33 @@ const readDirectory = async (
           ...directoryContents,
         };
       } else {
-        const content = await fs.promises.readFile(resPath, 'utf8');
-        return {
-          id: uuidv4(),
-          filename: dirent.name,
-          content,
-          path: `/${itemPath}`,
-          fileType: 'file',
-          isActive: false,
-        };
+        // Check if the file is an image or a PDF
+        const imageExtensions = ['.png', '.jpg', '.jpeg', '.gif'];
+        const isImage = imageExtensions.some((ext) =>
+          dirent.name.endsWith(ext)
+        );
+        const isPdf = dirent.name.endsWith('.pdf');
+
+        if (isImage || isPdf) {
+          return {
+            id: uuidv4(),
+            filename: dirent.name,
+            content: { src: `${itemPath}` }, // Set the content to an object with src
+            path: `/${itemPath}`,
+            fileType: 'file',
+            isActive: false,
+          };
+        } else {
+          const content = await fs.promises.readFile(resPath, 'utf8');
+          return {
+            id: uuidv4(),
+            filename: dirent.name,
+            content,
+            path: `/${itemPath}`,
+            fileType: 'file',
+            isActive: false,
+          };
+        }
       }
     })
   );
@@ -54,6 +72,7 @@ const readDirectory = async (
   return { files, folders };
 };
 
+// need to figure out why it calls 4 times
 export const GET = async () => {
   try {
     const data = await readDirectory(dbPath);

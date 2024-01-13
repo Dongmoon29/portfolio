@@ -45,7 +45,7 @@ const VsCodeComponent: FC = () => {
               theme === 'dark' ? 'bg-gray-800' : 'bg-gray-200'
             }`}>
             <VsCodeBuffers />
-            <VsCodeEditorArea content={state.currentFile?.content} />
+            <VsCodeEditorArea content={state.currentFile?.content ?? ''} />
           </div>
         </div>
       </div>

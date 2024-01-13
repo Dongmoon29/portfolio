@@ -60,6 +60,24 @@ export const FileIcon: FC<FileIconProps> = ({ filename, size }) => {
     );
   }
 
+  if (
+    filename.endsWith('.png') ||
+    filename.endsWith('.jpg') ||
+    filename.endsWith('.jpeg')
+  ) {
+    icon = (
+      <div className="min-w-4">
+        <Image
+          src={'/svgs/image.svg'}
+          priority
+          height={size}
+          width={size}
+          alt="icon"
+        />
+      </div>
+    );
+  }
+
   return icon;
 };
 
