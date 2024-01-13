@@ -1,6 +1,8 @@
 import { initialState } from '@/context/VscodeContext';
 import { VsCodeFileType, VsCodeFolderType } from '@/types/vscodeTypes';
 
+// TODO need to refator this reducer
+
 const updateIsActive = (
   items: Array<VsCodeFileType | VsCodeFolderType>,
   id: string

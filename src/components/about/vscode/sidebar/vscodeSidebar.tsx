@@ -6,8 +6,13 @@ import { VscodeContext, useVscodeContext } from '@/context/VscodeContext';
 import { VsCodeFileType, VsCodeFolderType } from '@/types/vscodeTypes';
 import { FC, MouseEventHandler, useContext, useId } from 'react';
 import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io';
+import { MdClose } from 'react-icons/md';
 
-export const VscodeSidebar: FC = () => {
+type VscodeSidebarProps = {
+  toggleSidebar: () => void;
+};
+
+export const VscodeSidebar: FC<VscodeSidebarProps> = ({ toggleSidebar }) => {
   const { state } = useContext(VscodeContext);
   const { theme } = useThemeContext();
   const folders = state.fileExplorer?.folders;
@@ -15,10 +20,15 @@ export const VscodeSidebar: FC = () => {
 
   return (
     <div
-      className={`hidden md:flex flex-col gap-2 md:w-1/5 p-5 ${
+      className={`hidden md:flex flex-col gap-2 md:w-1/6 p-5 ${
         theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'
       }`}>
-      <h1 className="text-sm text-nowrap truncate">EXPLORER: PORTFOLIO</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-nowrap truncate">EXPLORER: PORTFOLIO</h1>
+        <div onClick={toggleSidebar} className={'cursor-pointer'}>
+          <MdClose />
+        </div>
+      </div>
       <div>
         {folders
           ? folders.map((folder) => (
@@ -53,7 +63,6 @@ const VsCodeFolder: FC<VsCodeFolderProps> = ({ folder, level }) => {
   };
 
   const padding = `${(level - 1) * 10}`;
-  console.log(padding);
 
   return (
     <div
@@ -67,7 +76,7 @@ const VsCodeFolder: FC<VsCodeFolderProps> = ({ folder, level }) => {
             <FolderIcon isOpen />
           </div>
         ) : (
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center gap-2">
             <IoIosArrowForward />
             <FolderIcon />
           </div>
