@@ -7,10 +7,12 @@ type VsCodeEditorAreaProps = {
   content: string | { src: string };
 };
 
+// FIXME: need to fix layout when buffer x axis gets overflow, main content area also grow and breaks layout
 export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ content }) => {
   const { theme } = useThemeContext();
   const [currentContents, setCurrentContents] = useState(content);
   const [mediaContent, setMediaContent] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
   const lines =
     typeof currentContents === 'string' ? currentContents.split('\n') : null;
 
@@ -19,6 +21,7 @@ export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ content }) => {
   }, [content]);
   useEffect(() => {
     if (typeof currentContents === 'string') return;
+    setLoading(true);
     const fetchMediaContent = async () => {
       try {
         const res = await fetch(`/api/media?uri=${currentContents.src}`);
@@ -29,7 +32,9 @@ export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ content }) => {
         const blob = await res.blob();
         const uri = URL.createObjectURL(blob);
         setMediaContent(uri);
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.error(error);
       }
     };
@@ -70,10 +75,10 @@ export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ content }) => {
               onChange={handleInputChange}
             />
           )}
-          {typeof currentContents !== 'string' && (
+          {typeof currentContents !== 'string' && !loading && (
             <iframe
               className="w-full h-full"
-              src={`${mediaContent}#view=Fit`}
+              src={`${mediaContent}`}
               title="vscode"
             />
           )}

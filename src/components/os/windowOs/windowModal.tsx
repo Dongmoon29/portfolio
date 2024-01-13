@@ -3,6 +3,33 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { FC, useEffect, useRef } from 'react';
 
+const fetchMediaContent = async () => {
+  try {
+    const res = await fetch(
+      `/api/media?uri=Dongmoon_Kim_Software_Developer.pdf`
+    );
+    if (!res.ok) {
+      throw new Error(`Error fetching media content: ${res.statusText}`);
+    }
+
+    const blob = await res.blob();
+    const uri = URL.createObjectURL(blob);
+
+    // Create a temporary link and trigger the download
+    const link = document.createElement('a');
+    link.href = uri;
+    link.download = 'Dongmoon_Kim_Software_Developer.pdf'; // Name of the downloaded file
+    document.body.appendChild(link);
+    link.click();
+
+    // Clean up
+    URL.revokeObjectURL(uri);
+    document.body.removeChild(link);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -47,7 +74,9 @@ export const Modal: FC<ModalProps> = ({ isOpen, onClose }) => {
           <h1 className="font-semibold text-xl">Recommend</h1>
           <nav className="flex w-full">
             <ul className="grid grid-cols-1 lg:grid-cols-2 gap-3 w-full">
-              <li className=" gap-2 flex items-center text-sm">
+              <li
+                className=" gap-2 flex items-center text-sm cursor-pointer"
+                onClick={fetchMediaContent}>
                 <Image
                   src="/svgs/resume.svg"
                   width={30}
