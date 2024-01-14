@@ -1,89 +1,103 @@
 'use client';
-
+import { FC, useState, ChangeEvent, useEffect, useMemo } from 'react';
 import { useThemeContext } from '@/context/ThemeContext';
-import { FC, useState, ChangeEvent, useEffect } from 'react';
 
 type VsCodeEditorAreaProps = {
   content: string | { src: string };
 };
 
-// FIXME: need to fix layout when buffer x axis gets overflow, main content area also grow and breaks layout
 export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ content }) => {
   const { theme } = useThemeContext();
   const [currentContents, setCurrentContents] = useState(content);
-  const [mediaContent, setMediaContent] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
-  const lines =
-    typeof currentContents === 'string' ? currentContents.split('\n') : null;
+  const [mediaContent, setMediaContent] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setCurrentContents(content ?? '');
   }, [content]);
-  useEffect(() => {
-    if (typeof currentContents === 'string') return;
-    setLoading(true);
-    const fetchMediaContent = async () => {
-      try {
-        const res = await fetch(`/api/media?uri=${currentContents.src}`);
-        if (!res.ok) {
-          throw new Error(`Error fetching PDF content: ${res.statusText}`);
-        }
 
-        const blob = await res.blob();
-        const uri = URL.createObjectURL(blob);
-        setMediaContent(uri);
+  useEffect(() => {
+    const fetchMediaContent = async (currentContents: { src: string }) => {
+      try {
+        const response = await fetch(`/api/media?uri=${currentContents.src}`);
+        if (!response.ok)
+          throw new Error(`Error fetching content: ${response.statusText}`);
+        const blob = await response.blob();
+        setMediaContent(URL.createObjectURL(blob));
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
         setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        console.error(error);
       }
     };
 
-    fetchMediaContent();
+    if (typeof currentContents !== 'string') {
+      setLoading(true);
+      fetchMediaContent(currentContents);
+    }
   }, [currentContents]);
 
   const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setCurrentContents(e.target.value);
   };
 
+  const editorClassName = useMemo(
+    () => (theme === 'dark' ? 'bg-black' : 'bg-gray-50'),
+    [theme]
+  );
+
   return (
     <div
-      className={`${
-        theme === 'dark' ? 'bg-black' : 'bg-gray-50'
-      } w-full flex-1 overflow-auto flex`}>
-      <div className=" flex gap-2 flex-1">
-        {lines && (
-          <div className="flex flex-col">
-            {lines.map((_, index) => (
-              <div
-                className={`${
-                  theme === 'dark' ? 'bg-black' : 'bg-gray-50'
-                } w-14 text-center`}
-                key={index}>
-                {index + 1}
-              </div>
-            ))}
-          </div>
-        )}
-        <div className="flex-1">
-          {typeof currentContents === 'string' && (
-            <textarea
-              className={`${
-                theme === 'dark' ? 'bg-black' : 'bg-gray-50'
-              } w-full h-full resize-none focus:outline-none overflow-hidden text-nowrap overflow-x-auto`}
-              value={currentContents}
-              onChange={handleInputChange}
-            />
-          )}
-          {typeof currentContents !== 'string' && !loading && (
-            <iframe
-              className="w-full h-full"
-              src={`${mediaContent}`}
-              title="vscode"
-            />
-          )}
-        </div>
+      className={`${editorClassName} w-full flex-1 flex flex-col rounded-br-xl`}>
+      <div className="flex flex-1 overflow-auto">
+        <div
+          className={`${
+            theme === 'dark' ? 'bg-gray-700' : 'bg-gray-300'
+          } w-10 mr-2`}></div>
+        <EditorContent
+          currentContents={currentContents}
+          loading={loading}
+          mediaContent={mediaContent}
+          onChange={handleInputChange}
+        />
       </div>
+      {error && <div className="text-red-500">{error}</div>}
     </div>
   );
+};
+
+const EditorContent = ({
+  currentContents,
+  loading,
+  mediaContent,
+  onChange,
+}: {
+  currentContents: string | { src: string };
+  loading: boolean;
+  mediaContent: string | null;
+  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+}) => {
+  if (typeof currentContents === 'string') {
+    return (
+      <textarea
+        className="pb-2 w-full bg-inherit h-full resize-none focus:outline-none overflow-x-auto"
+        value={currentContents}
+        wrap="off"
+        onChange={onChange}
+      />
+    );
+  }
+
+  if (!loading && mediaContent) {
+    return (
+      <iframe
+        className="w-full bg-inherit flex-1"
+        src={mediaContent}
+        title="vscode"
+      />
+    );
+  }
+
+  return null;
 };
