@@ -92,7 +92,7 @@ const EditorContent = ({
   if (!loading && mediaContent) {
     return (
       <iframe
-        className="w-full p-3 bg-inherit flex-1"
+        className="w-full bg-inherit flex-1"
         src={mediaContent}
         title="vscode"
       />
