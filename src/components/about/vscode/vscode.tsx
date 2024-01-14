@@ -12,11 +12,16 @@ import { useThemeContext } from '@/context/ThemeContext';
 import { FaRegCopy } from 'react-icons/fa';
 import { WindowHeader } from '@/components/os/windowOs/windowHeader';
 
-const VsCodeComponent: FC = () => {
+type VsCodeComponentProps = {
+  toggleMaximize?: () => void;
+};
+
+const VsCodeComponent: FC<VsCodeComponentProps> = ({ toggleMaximize }) => {
   const { state } = useVscodeContext();
   const { os } = useOsContext();
   const { theme } = useThemeContext();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isMaximize, setIsMaximize] = useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);
@@ -24,13 +29,14 @@ const VsCodeComponent: FC = () => {
 
   return (
     <div
-      className={`flex flex-col overflow-auto ${
+      className={`flex flex-col ${
         theme === 'dark' ? 'text-white' : 'text-black'
-      } rounded-t-xl h-full w-full rounded-b-xl`}>
+      } rounded-xl ${isMaximize ? 'h-screen w-screen' : 'h-full w-full'}`}>
       {os === 'MacOs' ? (
         <OsxWindowHeader title="editor" />
       ) : (
         <WindowHeader
+          toggleMaximize={toggleMaximize}
           title="editor"
           icon={
             <Image
@@ -43,14 +49,14 @@ const VsCodeComponent: FC = () => {
           }
         />
       )}
-      <div className="flex flex-col overflow-hidden h-full w-full text-xs md:text-sm">
-        <div className="flex flex-1 min-h-0">
+      <div className="flex flex-col h-full w-full text-xs md:text-sm">
+        <div className="flex flex-1 rounded-br-xl">
           <div
             className={`hidden sm:flex flex-col p-5 ${
               theme === 'dark'
                 ? 'bg-gray-600 text-gray-300'
                 : 'bg-gray-950 text-gray-200'
-            } `}>
+            } rounded-bl-xl `}>
             <div
               className={`text-xl cursor-pointer hover:${
                 theme === 'dark' ? 'text-gray-200' : 'text-gray-100'
