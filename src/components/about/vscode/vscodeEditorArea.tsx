@@ -54,7 +54,7 @@ export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ content }) => {
         <div
           className={`${
             theme === 'dark' ? 'bg-gray-700' : 'bg-gray-300'
-          } w-10 mr-2`}></div>
+          } w-10`}></div>
         <EditorContent
           currentContents={currentContents}
           loading={loading}
@@ -81,7 +81,7 @@ const EditorContent = ({
   if (typeof currentContents === 'string') {
     return (
       <textarea
-        className="pb-2 w-full bg-inherit h-full resize-none focus:outline-none overflow-x-auto"
+        className="p-3 w-full bg-inherit h-full resize-none focus:outline-none overflow-x-auto"
         value={currentContents}
         wrap="off"
         onChange={onChange}
@@ -92,7 +92,7 @@ const EditorContent = ({
   if (!loading && mediaContent) {
     return (
       <iframe
-        className="w-full bg-inherit flex-1"
+        className="w-full p-3 bg-inherit flex-1"
         src={mediaContent}
         title="vscode"
       />
