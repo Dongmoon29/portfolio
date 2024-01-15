@@ -1,3 +1,7 @@
+import ReactMarkDown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+
+const markdown = `
 # Dongmoon Kim - Software Developer
 
 
@@ -5,7 +9,7 @@
 - **Location:** Copenhagen, Denmark
 - **Phone:** +45 81655923
 - **Email:** [ehdans04@gmail.com](mailto:ehdans04@gmail.com)
-- **GitHub:** [https://github.com/Dongmoon29](https://github.com/Dongmoon29/)
+- **GitHub:** [GitHub page](#)
 
 ---
 
@@ -46,3 +50,14 @@ _Seoul Digital University, Seoul_
 
 ### Codestates Blockchain Bootcamp
 _September 2021 - December 2021_
+`;
+
+const Testing = () => {
+  return (
+    <ReactMarkDown className={'markdown'} remarkPlugins={[remarkGfm]}>
+      {markdown}
+    </ReactMarkDown>
+  );
+};
+
+export default Testing;

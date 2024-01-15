@@ -9,13 +9,14 @@ export const VsCodeBuffers: FC = () => {
   const { state } = useVscodeContext();
   const { theme } = useThemeContext();
   const buffers = state.buffers;
+
   if (!buffers) {
     return null;
   }
 
   return (
     <div
-      className={`flex justify-start items-end overflow-auto w-full border-b-8 ${
+      className={`flex justify-start items-end overflow-auto border-b-2 sm:border-b-8 ${
         theme === 'dark' ? 'border-gray-700' : 'border-gray-300'
       }`}>
       {buffers.map((buffer) => (

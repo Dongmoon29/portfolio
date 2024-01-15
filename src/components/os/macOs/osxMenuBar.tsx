@@ -17,7 +17,7 @@ export const OsxMenuBar = () => {
     <div
       className={`flex items-center ${
         theme === 'dark' ? 'bg-gray-400' : 'bg-gray-200'
-      } text-black w-full px-3 py-1`}>
+      } text-black w-full px-3 py-1 text-xs sm:text-lg`}>
       <div className="dropdown">
         <div tabIndex={0} role="button" className="mr-5">
           <FaApple />

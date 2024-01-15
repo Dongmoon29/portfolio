@@ -60,6 +60,32 @@ export const FileIcon: FC<FileIconProps> = ({ filename, size }) => {
     );
   }
 
+  if (filename.endsWith('.md')) {
+    icon = (
+      <div className="min-w-4">
+        <Image
+          src={'/svgs/md.svg'}
+          priority
+          height={size}
+          width={size}
+          alt="icon"
+        />
+      </div>
+    );
+  }
+  if (filename.endsWith('.txt')) {
+    icon = (
+      <div className="min-w-4">
+        <Image
+          src={'/svgs/txt.svg'}
+          priority
+          height={size}
+          width={size}
+          alt="icon"
+        />
+      </div>
+    );
+  }
   if (
     filename.endsWith('.png') ||
     filename.endsWith('.jpg') ||

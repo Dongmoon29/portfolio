@@ -1,21 +1,28 @@
 'use client';
 import { FC, useState, ChangeEvent, useEffect, useMemo } from 'react';
 import { useThemeContext } from '@/context/ThemeContext';
+import { VsCodeFileType } from '@/types/vscodeTypes';
+import ReactMarkDown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 type VsCodeEditorAreaProps = {
-  content: string | { src: string };
+  file?: VsCodeFileType;
 };
 
-export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ content }) => {
+export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ file }) => {
   const { theme } = useThemeContext();
-  const [currentContents, setCurrentContents] = useState(content);
+  // string or {src: string} that is not a text file
+  const [currentContents, setCurrentContents] = useState<
+    string | { src: string } | undefined
+  >(file?.content ?? undefined);
+  // for image, pdf, etc to store blob data
   const [mediaContent, setMediaContent] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setCurrentContents(content ?? '');
-  }, [content]);
+    setCurrentContents(file?.content);
+  }, [file]);
 
   useEffect(() => {
     const fetchMediaContent = async (currentContents: { src: string }) => {
@@ -32,7 +39,7 @@ export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ content }) => {
       }
     };
 
-    if (typeof currentContents !== 'string') {
+    if (currentContents && typeof currentContents !== 'string') {
       setLoading(true);
       fetchMediaContent(currentContents);
     }
@@ -50,12 +57,13 @@ export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ content }) => {
   return (
     <div
       className={`${editorClassName} w-full flex-1 flex flex-col rounded-br-xl`}>
-      <div className="flex flex-1 overflow-auto">
+      <div className="flex flex-1">
         <div
-          className={`${
+          className={`hidden ${
             theme === 'dark' ? 'bg-gray-700' : 'bg-gray-300'
-          } w-10`}></div>
+          } sm:w-10`}></div>
         <EditorContent
+          file={file}
           currentContents={currentContents}
           loading={loading}
           mediaContent={mediaContent}
@@ -72,16 +80,40 @@ const EditorContent = ({
   loading,
   mediaContent,
   onChange,
+  file,
 }: {
-  currentContents: string | { src: string };
   loading: boolean;
   mediaContent: string | null;
   onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  file?: VsCodeFileType;
+  currentContents?: string | { src: string };
 }) => {
+  const { theme } = useThemeContext();
+  if (!file || !currentContents) {
+    return (
+      <div>
+        <h1>no content</h1>
+      </div>
+    );
+  }
   if (typeof currentContents === 'string') {
+    if (file.filename.endsWith('.md')) {
+      return (
+        <div className="h-full pb-20 overflow-auto">
+          <ReactMarkDown
+            className={`h-0 ${
+              theme === 'dark' ? 'dark' : 'light'
+            } markdown p-4`}
+            remarkPlugins={[remarkGfm]}>
+            {currentContents}
+          </ReactMarkDown>
+        </div>
+      );
+    }
+
     return (
       <textarea
-        className="p-3 w-full bg-inherit h-full resize-none focus:outline-none overflow-x-auto"
+        className="p-3 w-full bg-inherit h-full resize-none focus:outline-none overflow-auto"
         value={currentContents}
         wrap="off"
         onChange={onChange}

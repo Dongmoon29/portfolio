@@ -14,14 +14,17 @@ import { WindowHeader } from '@/components/os/windowOs/windowHeader';
 
 type VsCodeComponentProps = {
   toggleMaximize?: () => void;
+  isMaximize: boolean;
 };
 
-const VsCodeComponent: FC<VsCodeComponentProps> = ({ toggleMaximize }) => {
+const VsCodeComponent: FC<VsCodeComponentProps> = ({
+  toggleMaximize,
+  isMaximize,
+}) => {
   const { state } = useVscodeContext();
   const { os } = useOsContext();
   const { theme } = useThemeContext();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [isMaximize, setIsMaximize] = useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);
@@ -31,11 +34,12 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({ toggleMaximize }) => {
     <div
       className={`flex flex-col ${
         theme === 'dark' ? 'text-white' : 'text-black'
-      } rounded-xl ${isMaximize ? 'h-screen w-screen' : 'h-full w-full'}`}>
+      } h-full`}>
       {os === 'MacOs' ? (
         <OsxWindowHeader title="editor" />
       ) : (
         <WindowHeader
+          isMaximize={isMaximize}
           toggleMaximize={toggleMaximize}
           title="editor"
           icon={
@@ -69,11 +73,11 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({ toggleMaximize }) => {
             <VscodeSidebar toggleSidebar={toggleSidebar} />
           ) : null}
           <div
-            className={`flex flex-col flex-1 w-full ${
+            className={`flex flex-col w-full ${
               theme === 'dark' ? 'bg-gray-800' : 'bg-gray-200'
-            }`}>
+            } overflow-auto`}>
             <VsCodeBuffers />
-            <VsCodeEditorArea content={state.currentFile?.content ?? ''} />
+            <VsCodeEditorArea file={state.currentFile} />
           </div>
         </div>
       </div>
