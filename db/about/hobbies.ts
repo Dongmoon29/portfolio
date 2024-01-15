@@ -1,3 +1,9 @@
+const setMyGoal = (hobbies: Hobbies) => {
+  hobbies.forEach((hobby) => {
+    console.log(`I will do ${hobby.name} more!`);
+  });
+};
+
 type Hobby = {
   name: string;
   description: string;
