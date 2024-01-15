@@ -127,20 +127,13 @@ const EditorContent = ({
       );
     }
 
-    // return (
-    //   <textarea
-    //     className="p-3 w-full bg-inherit h-full resize-none focus:outline-none overflow-auto"
-    //     value={currentContents}
-    //     wrap="off"
-    //     onChange={onChange}
-    //   />
-    // );
     return (
       <CodeEditor
         value={currentContents}
         language={file.filename.split('.').pop()}
         onChange={(evn: any) => onChange(evn.target.value)}
         padding={15}
+        data-color-mode={theme === 'dark' ? 'dark' : 'light'}
         style={{
           backgroundColor: theme === 'dark' ? '#000' : '#fff',
           fontFamily:

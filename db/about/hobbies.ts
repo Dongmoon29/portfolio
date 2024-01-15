@@ -16,7 +16,7 @@ const myHobbies: Hobbies = [
   },
   {
     name: 'Play bass guitar',
-    description: 'Just start it, but I love it',
+    description: "It's fun, just a bit on the slow side.",
     isHealthy: true,
     shouldDevelopFuther: true,
   },
