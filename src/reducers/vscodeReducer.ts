@@ -1,6 +1,10 @@
 import { VsCodeActions } from '@/actions/vscodeActions';
 import { VsCodeState, initialState } from '@/context/VscodeContext';
-import { VsCodeFileType, VsCodeFolderType } from '@/types/vscodeTypes';
+import {
+  VsCodeBuffer,
+  VsCodeFileType,
+  VsCodeFolderType,
+} from '@/types/vscodeTypes';
 import { Reducer } from 'react';
 
 const updateIsActive = (
@@ -80,8 +84,11 @@ export const vscodeReducer: Reducer<VsCodeState, VsCodeActions> = (
     case 'INITIALIZE': {
       const { files, folders } = action.payload.data;
       const currentFile = getInitialCurrentFile(folders, files);
-      const initBuffers = currentFile
-        ? [{ ...currentFile, isActive: true }]
+      const initBuffers: VsCodeBuffer[] = currentFile
+        ? [
+            { ...currentFile, isActive: true },
+            ...files.filter((file) => file.id !== currentFile.id),
+          ]
         : [];
       return {
         ...state,

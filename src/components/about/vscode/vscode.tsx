@@ -36,7 +36,11 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
         theme === 'dark' ? 'text-white' : 'text-black'
       } h-full`}>
       {os === 'MacOs' ? (
-        <OsxWindowHeader title="editor" />
+        <OsxWindowHeader
+          title="editor"
+          toggleMaximize={toggleMaximize}
+          isMaximize={isMaximize}
+        />
       ) : (
         <WindowHeader
           isMaximize={isMaximize}

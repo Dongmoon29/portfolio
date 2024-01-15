@@ -16,7 +16,7 @@ export const WindowMenuBar = () => {
   };
 
   return (
-    <div className="h-10 bg-gray-300 flex justify-center items-center gap-6">
+    <div className="h-10 w-full bg-gray-300 flex justify-center items-center gap-6">
       <button
         role="button"
         className="hover:scale-110 transition duration-200 ease-in-out cursor-pointer"

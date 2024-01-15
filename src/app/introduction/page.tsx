@@ -25,16 +25,16 @@ const Intruduction = () => {
 
   return (
     <section
-      className={`relative flex-col pb-32 lg:pb-10 gap-9 flex items-center max-h-screen h-screen bg-gradient-to-r ${
+      className={`flex-col pb-32 lg:pb-10 sm:gap-9 md:gap-9 lg:gap-14 flex items-center max-h-screen h-screen bg-gradient-to-r ${
         theme === 'light'
           ? ' from-sky-200 to-sky-500'
           : 'from-sky-950 to-orange-900'
-      } snap-start ${os === 'MacOs' ? '' : 'pt-20'}`}
+      } overflow-auto ${os === 'MacOs' ? '' : 'pt-20'}`}
       id="introduction">
       {os === 'MacOs' ? <OsxMenuBar /> : null}
       <div
         className={
-          'flex-col lg:flex-row gap-5 flex justify-center items-center mb-10'
+          'flex-col lg:flex-row gap-5 flex justify-center items-center'
         }>
         <div
           className={`bg-gradient-to-r ${
@@ -67,7 +67,11 @@ const Intruduction = () => {
         </div>
       </div>
       <Console />
-      {os === 'Window' && <WindowMenuBar />}
+      {os === 'Window' && (
+        <div className="absolute bottom-0 left-0 w-full flex items-center justify-center">
+          <WindowMenuBar />
+        </div>
+      )}
     </section>
   );
 };

@@ -18,22 +18,26 @@ export const Console = () => {
 
   return (
     <div
-      className={`rounded-xl ${
+      className={`hidden sm:block rounded-xl ${
         theme === 'light' ? 'bg-gray-100' : 'bg-gray-800'
-      } w-4/5 md:w-2/5 h-60 md:h-96`}>
+      } w-4/5 h-40 sm:h-60 md:h-96`}>
       {os === 'MacOs' ? (
-        <OsxWindowHeader title="terminal" />
+        <OsxWindowHeader
+          title="terminal"
+          toggleMaximize={() => {}}
+          isMaximize={false}
+        />
       ) : (
         <WindowHeader title="terminal" isMaximize={false} />
       )}
-      <div className="rounded-b-xl p-3 pb-1 min-h-60">
+      <div className="rounded-b-xl p-3 pb-1">
         <div className="text-center mb-5">
           <pre>{asciiDog}</pre>
         </div>
         <div
-          className={`m-auto ${
+          className={` ${
             theme === 'light' ? 'text-gray-700' : 'text-gray-200'
-          } text-sm text-left h-50 w-150`}>
+          } text-sm text-left`}>
           <span>$ {text}</span>
         </div>
       </div>
