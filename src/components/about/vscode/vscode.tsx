@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { FC, MouseEvent, useState } from 'react';
 import { OsxWindowHeader } from '../../os/macOs/osxWindowHeader';
 import { useVscodeContext } from '@/context/VscodeContext';
 import { VsCodeBuffers } from './vscodeBuffers';
@@ -27,7 +27,8 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
   const { theme } = useThemeContext();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-  const toggleSidebar = () => {
+  const toggleSidebar = (event: MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
     setIsSidebarOpen((prev) => !prev);
   };
 

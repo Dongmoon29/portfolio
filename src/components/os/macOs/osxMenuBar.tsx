@@ -25,9 +25,9 @@ export const OsxMenuBar = () => {
 
         <ul
           tabIndex={0}
-          className="dropdown-content z-[1] menu p-5 shadow bg-gray-300 rounded-box w-52">
+          className="dropdown-content z-[1] menu shadow bg-gray-300 w-52">
           <li onClick={() => handleOsToggle(newOs)}>
-            <a>Change to {newOs}</a>
+            <div>Change to {newOs}</div>
           </li>
         </ul>
       </div>
@@ -39,7 +39,7 @@ export const OsxMenuBar = () => {
         <div>
           <ul className="flex gap-3">
             <li>
-              <Link href={'/introduction'}>Instroduction</Link>
+              <Link href={'/introduction'}>Greeting</Link>
             </li>
             <li>
               <Link href={'/about'}>About</Link>
