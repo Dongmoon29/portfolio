@@ -8,11 +8,13 @@ type WindowHeaderProps = {
   title: string;
   icon?: ReactNode;
   toggleMaximize?: () => void;
+  isMaximize: boolean;
 };
 export const WindowHeader: FC<WindowHeaderProps> = ({
   title,
   icon,
   toggleMaximize,
+  isMaximize,
 }) => {
   return (
     <div className="grid grid-cols-3 justify-center items-center text-white bg-gray-700 rounded-none sm:rounded-t-xl p-2 h-10">

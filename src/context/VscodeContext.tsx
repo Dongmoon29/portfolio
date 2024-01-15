@@ -6,18 +6,20 @@ import React, {
   useState,
   ReactNode,
   Dispatch,
+  Reducer,
 } from 'react';
 import { vscodeReducer } from '@/reducers/vscodeReducer';
 import {
-  VsCodeFileStorage,
+  VsCodeBuffer,
   VsCodeFileType,
   VsCodeFolderType,
 } from '@/types/vscodeTypes';
+import { VsCodeActions } from '@/actions/vscodeActions';
 
 export type VsCodeState = {
-  files: VsCodeFileStorage;
+  files: VsCodeFileType[];
   currentFile?: VsCodeFileType;
-  buffers: { id: string; filename: string; isActive: boolean }[];
+  buffers: VsCodeBuffer[];
   fileExplorer: { files: VsCodeFileType[]; folders: VsCodeFolderType[] };
 };
 
@@ -30,7 +32,7 @@ export const initialState: VsCodeState = {
 
 export const VscodeContext = createContext<{
   state: VsCodeState;
-  dispatch: Dispatch<any>;
+  dispatch: Dispatch<VsCodeActions>;
 }>({
   state: initialState,
   dispatch: () => null,
@@ -38,7 +40,10 @@ export const VscodeContext = createContext<{
 
 export const VscodeProvider = ({ children }: { children: ReactNode }) => {
   const [isInitialized, setInitialized] = useState(false);
-  const [state, dispatch] = useReducer(vscodeReducer, initialState);
+  const [state, dispatch] = useReducer<Reducer<VsCodeState, VsCodeActions>>(
+    vscodeReducer,
+    initialState
+  );
 
   useEffect(() => {
     const initializeState = async () => {

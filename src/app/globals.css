@@ -12,7 +12,6 @@
   @apply pb-10;
 }
 
-/* Light theme styles */
 .markdown h1 {
   @apply text-3xl font-bold mb-4 text-gray-900;
 }
@@ -41,7 +40,6 @@
   @apply my-4 border-gray-300;
 }
 
-/* Dark theme styles using the `dark:` variant */
 .dark.markdown h1 {
   @apply text-white;
 }

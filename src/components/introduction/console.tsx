@@ -24,7 +24,7 @@ export const Console = () => {
       {os === 'MacOs' ? (
         <OsxWindowHeader title="terminal" />
       ) : (
-        <WindowHeader title="terminal" />
+        <WindowHeader title="terminal" isMaximize={false} />
       )}
       <div className="rounded-b-xl p-3 pb-1 min-h-60">
         <div className="text-center mb-5">

@@ -17,4 +17,4 @@ export type VsCodeFileType = {
   isActive: boolean;
 };
 
-export type VsCodeFileStorage = VsCodeFileType[];
+export type VsCodeBuffer = { id: string; filename: string; isActive: boolean };

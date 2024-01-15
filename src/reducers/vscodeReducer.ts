@@ -1,12 +1,16 @@
-import { initialState } from '@/context/VscodeContext';
-import { VsCodeFileType, VsCodeFolderType } from '@/types/vscodeTypes';
-
-// TODO need to refator this reducer
+import { VsCodeActions } from '@/actions/vscodeActions';
+import { VsCodeState, initialState } from '@/context/VscodeContext';
+import {
+  VsCodeBuffer,
+  VsCodeFileType,
+  VsCodeFolderType,
+} from '@/types/vscodeTypes';
+import { Reducer } from 'react';
 
 const updateIsActive = (
   items: Array<VsCodeFileType | VsCodeFolderType>,
   id: string
-): (VsCodeFileType | VsCodeFolderType)[] => {
+): any => {
   return items.map((item: VsCodeFileType | VsCodeFolderType) => {
     if (item.fileType === 'folder') {
       return {
@@ -26,10 +30,10 @@ const updateIsActive = (
   });
 };
 
-const toggleFolder: VsCodeFolderType[] = (
+const toggleFolder = (
   folders: VsCodeFolderType[],
   targetId: string
-) => {
+): VsCodeFolderType[] => {
   return folders.map((folder) => ({
     ...folder,
     isActive: folder.id === targetId ? !folder.isActive : folder.isActive,
@@ -40,18 +44,26 @@ const toggleFolder: VsCodeFolderType[] = (
 };
 
 const getInitialCurrentFile = (
-  files?: VsCodeFileType[],
-  folders: VsCodeFolderType[]
-) => {
+  folders: VsCodeFolderType[],
+  files?: VsCodeFileType[]
+): VsCodeFileType | undefined => {
   if (files?.length) return files[0];
-  if (folders?.length)
-    return getInitialCurrentFile(folders[0].files, undefined);
-  return null;
+
+  for (const folder of folders) {
+    if (folder.files?.length) return folder.files[0];
+
+    if (folder.folders?.length) {
+      const file = getInitialCurrentFile(folder.folders);
+      if (file) return file;
+    }
+  }
+
+  return undefined;
 };
 
-const collectFiles = (folders) =>
+const collectFiles = (folders: VsCodeFolderType[]): VsCodeFileType[] =>
   folders.reduce(
-    (allFiles, folder) => [
+    (allFiles: VsCodeFileType[], folder: VsCodeFolderType) => [
       ...allFiles,
       ...folder.files,
       ...(folder.folders ? collectFiles(folder.folders) : []),
@@ -59,21 +71,24 @@ const collectFiles = (folders) =>
     []
   );
 
-const setFileStore = (files = [], folders = []) => [
+const setFileStore = (files: VsCodeFileType[], folders: VsCodeFolderType[]) => [
   ...files,
   ...collectFiles(folders),
 ];
-
-export const vscodeReducer = (state = initialState, action) => {
+// @ts-ignore
+export const vscodeReducer: Reducer<VsCodeState, VsCodeActions> = (
+  state = initialState,
+  action
+) => {
   switch (action.type) {
     case 'INITIALIZE': {
       const { files, folders } = action.payload.data;
-      const currentFile = getInitialCurrentFile(files, folders);
-      const activatedCurrentFile = { ...currentFile, isActive: true };
+      const currentFile = getInitialCurrentFile(folders, files);
+      const buffer = currentFile ? [{ ...currentFile, isActive: true }] : [];
       return {
         ...state,
         currentFile,
-        buffers: [activatedCurrentFile],
+        buffers: [buffer],
         fileExplorer: action.payload.data,
         files: setFileStore(files, folders),
       };
@@ -85,12 +100,17 @@ export const vscodeReducer = (state = initialState, action) => {
         ...buffer,
         isActive: buffer.id === fileId,
       }));
+      const bufferToAdd = newCurrentFile
+        ? { ...newCurrentFile, isActive: true }
+        : null;
       return {
         ...state,
         currentFile: newCurrentFile,
         buffers: state.buffers.some((buffer) => buffer.id === fileId)
           ? updatedBuffers
-          : [...updatedBuffers, { ...newCurrentFile, isActive: true }],
+          : [bufferToAdd]
+          ? [...updatedBuffers, bufferToAdd]
+          : updatedBuffers,
         fileExplorer: {
           ...state.fileExplorer,
           files: updateIsActive(state.fileExplorer.files, fileId),
@@ -105,7 +125,7 @@ export const vscodeReducer = (state = initialState, action) => {
       const newCurrentFile =
         newBuffers.length > 0
           ? state.files.find((file) => file.id === newBuffers[0].id)
-          : null;
+          : undefined;
 
       return {
         ...state,

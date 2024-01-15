@@ -39,6 +39,7 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
         <OsxWindowHeader title="editor" />
       ) : (
         <WindowHeader
+          isMaximize={isMaximize}
           toggleMaximize={toggleMaximize}
           title="editor"
           icon={
