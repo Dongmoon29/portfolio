@@ -4,12 +4,12 @@ import { FileIcon, FolderIcon } from '@/components/fileIcons/icons';
 import { useThemeContext } from '@/context/ThemeContext';
 import { VscodeContext, useVscodeContext } from '@/context/VscodeContext';
 import { VsCodeFileType, VsCodeFolderType } from '@/types/vscodeTypes';
-import { FC, MouseEventHandler, useContext, useId } from 'react';
+import { FC, MouseEvent, MouseEventHandler, useContext, useId } from 'react';
 import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io';
 import { MdClose } from 'react-icons/md';
 
 type VscodeSidebarProps = {
-  toggleSidebar: () => void;
+  toggleSidebar: (event: MouseEvent<HTMLDivElement>) => void;
 };
 
 export const VscodeSidebar: FC<VscodeSidebarProps> = ({ toggleSidebar }) => {
@@ -25,7 +25,9 @@ export const VscodeSidebar: FC<VscodeSidebarProps> = ({ toggleSidebar }) => {
       }`}>
       <div className="flex items-center justify-between">
         <h1 className="text-nowrap truncate">EXPLORER: PORTFOLIO</h1>
-        <div onClick={toggleSidebar} className={'cursor-pointer'}>
+        <div
+          onClick={(event: MouseEvent<HTMLDivElement>) => toggleSidebar(event)}
+          className={'cursor-pointer'}>
           <MdClose />
         </div>
       </div>

@@ -66,14 +66,13 @@ export const Modal: FC<ModalProps> = ({ isOpen, onClose }) => {
       onClick={handleOverlayClick}>
       <div
         onClick={handleContentClick}
-        className="gap-20 text-black p-5 xl:p-20 absolute flex flex-col items-center justify-center w-full h-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-sky-100  rounded-xl shadow">
-        <div>Search Component will be here</div>
+        className="gap-20 text-black p-5 xl:p-20 absolute flex flex-col items-center justify-center w-full h-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-500  rounded-xl shadow overflow-auto">
         <div className="flex flex-col items-start w-full gap-10 px-10 md:px-20">
           <h1 className="font-semibold text-xl">Recommend</h1>
           <nav className="flex w-full">
             <ul className="grid grid-cols-1 lg:grid-cols-2 gap-3 w-full ">
               <li
-                className="gap-2 flex items-center text-sm cursor-pointer bg-red-500"
+                className="gap-2 flex items-center text-sm cursor-pointer"
                 onClick={fetchMediaContent}>
                 <Image
                   src="/svgs/resume.svg"
@@ -84,7 +83,7 @@ export const Modal: FC<ModalProps> = ({ isOpen, onClose }) => {
                 />
                 <span>Download Resume</span>
               </li>
-              <li className="gap-2 flex items-center text-sm cursor-pointer bg-red-300">
+              <li className="gap-2 flex items-center text-sm cursor-pointer">
                 <Image
                   src="/svgs/email.svg"
                   width={30}
@@ -94,7 +93,7 @@ export const Modal: FC<ModalProps> = ({ isOpen, onClose }) => {
                 />
                 <Link href="/about">Send email</Link>
               </li>
-              <div className="dropdown dropdown-bottom bg-green-200">
+              <div className="dropdown dropdown-bottom">
                 <div
                   tabIndex={0}
                   role="button"

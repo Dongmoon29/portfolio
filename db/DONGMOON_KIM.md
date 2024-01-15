@@ -1,11 +1,11 @@
-![text](https://assets.digitalocean.com/articles/alligator/boo.svg "a title")
 # Dongmoon Kim - Software Developer
 
 ## Contact Information
 - **Location:** Copenhagen, Denmark
-- **Phone:** +45 81655923
+- **Phone:** +45 81 65 59 23
 - **Email:** [ehdans04@gmail.com](mailto:ehdans04@gmail.com)
 - **GitHub:** [https://github.com/Dongmoon29](https://github.com/Dongmoon29/)
+- **Linkedin:** [www.linkedin.com/in/dongmoon-kim-144674198](www.linkedin.com/in/dongmoon-kim-144674198/)
 
 ---
 
@@ -15,10 +15,10 @@
 ---
 
 ## Skills
-- 🌐 **Frontend:** JavaScript,TypeScript, Reactjs, Redux, CSS3, HTML5
-- 🔧 **Backend:** C#, Entity Framework
+- 🌐 **Frontend:** JavaScript, TypeScript, Reactjs, Redux, Jest, CSS3, HTML5
+- 🔧 **Backend:** C#, Entity Framework, Xunit
 - 🗣 **Languages:** Korean (Native), English (Fluent)
-- 🛠 **Tools:** Git, Typescript, SQL, MySql
+- 🛠 **Tools:** Git, SQL
 
 ---
 

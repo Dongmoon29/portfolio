@@ -52,7 +52,7 @@ export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ file }) => {
   };
 
   const editorClassName = useMemo(
-    () => (theme === 'dark' ? 'bg-black' : 'bg-gray-50'),
+    () => (theme === 'dark' ? 'bg-gray-900' : 'bg-gray-50'),
     [theme]
   );
 
@@ -135,7 +135,7 @@ const EditorContent = ({
         padding={15}
         data-color-mode={theme === 'dark' ? 'dark' : 'light'}
         style={{
-          backgroundColor: theme === 'dark' ? '#000' : '#fff',
+          backgroundColor: theme === 'dark' ? 'rgb(17 24 39)' : '#fff',
           fontFamily:
             'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
         }}

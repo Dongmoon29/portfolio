@@ -71,7 +71,7 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
               <div
                 className={`text-xl cursor-pointer hover:${
                   theme === 'dark' ? 'text-gray-200' : 'text-gray-100'
-                }`}
+                } hover:scale-150 transition ease-in-out`}
                 onClick={toggleSidebar}>
                 <FaRegCopy />
               </div>
@@ -82,7 +82,7 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
               <div
                 className={`text-xl cursor-pointer hover:${
                   theme === 'dark' ? 'text-gray-200' : 'text-gray-100'
-                }`}
+                } hover:scale-150 transition ease-in-out`}
                 onClick={toggleSidebar}>
                 <Link href={'https://github.com/Dongmoon29'} target="_blank">
                   <FaGithub />
