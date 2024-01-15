@@ -66,21 +66,27 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
                 ? 'bg-gray-600 text-gray-300'
                 : 'bg-gray-950 text-gray-200'
             } rounded-bl-xl `}>
-            <div
-              className={`text-xl cursor-pointer hover:${
-                theme === 'dark' ? 'text-gray-200' : 'text-gray-100'
-              }`}
-              onClick={toggleSidebar}>
-              <FaRegCopy />
+            <div className="tooltip tooltip-right" data-tip="file explorer">
+              <div
+                className={`text-xl cursor-pointer hover:${
+                  theme === 'dark' ? 'text-gray-200' : 'text-gray-100'
+                }`}
+                onClick={toggleSidebar}>
+                <FaRegCopy />
+              </div>
             </div>
             <div
-              className={`text-xl cursor-pointer hover:${
-                theme === 'dark' ? 'text-gray-200' : 'text-gray-100'
-              }`}
-              onClick={toggleSidebar}>
-              <Link href={'https://github.com/Dongmoon29'} target="_blank">
-                <FaGithub />
-              </Link>
+              className="tooltip tooltip-right"
+              data-tip="portfolio repository">
+              <div
+                className={`text-xl cursor-pointer hover:${
+                  theme === 'dark' ? 'text-gray-200' : 'text-gray-100'
+                }`}
+                onClick={toggleSidebar}>
+                <Link href={'https://github.com/Dongmoon29'} target="_blank">
+                  <FaGithub />
+                </Link>
+              </div>
             </div>
           </div>
           {isSidebarOpen ? (

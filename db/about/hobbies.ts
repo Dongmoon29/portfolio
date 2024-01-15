@@ -29,4 +29,4 @@ const myHobbies: Hobbies = [
 ];
 
 const healthyHobbies = myHobbies.filter((hobby) => hobby.isHealthy);
-setGoal(healthyHobbies);
+setMyGoal(healthyHobbies);
