@@ -1,0 +1,36 @@
+{
+  "project_name": "Portfolio",
+  "project_version": "0.1.0",
+  "main_technologies": {
+    "framework": "Next.js",
+    "UI_library": "React",
+    "styling": ["TailwindCSS", "DaisyUI"]
+  },
+  "libraries_and_tools": {
+    "UI_enhancements": [
+      "@uiw/react-textarea-code-editor",
+      "framer-motion",
+      "react-icons",
+      "react-markdown"
+    ],
+    "internationalization": [
+      "i18next",
+      "i18next-resources-to-backend",
+      "next-i18n-router",
+      "react-i18next"
+    ],
+    "markdown_processing": ["remark-gfm"],
+    "image_processing": ["sharp"],
+    "miscellaneous": ["react-hotkeys-hook", "uuidv4"]
+  },
+  "development_tools": {
+    "typescript_support": [
+      "typescript",
+      "@types/node",
+      "@types/react",
+      "@types/react-dom"
+    ],
+    "linting_and_formatting": ["eslint", "eslint-config-next"],
+    "styling_tools": ["autoprefixer", "postcss"]
+  }
+}
