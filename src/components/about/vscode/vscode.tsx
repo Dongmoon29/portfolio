@@ -9,8 +9,9 @@ import { VscodeSidebar } from './sidebar/vscodeSidebar';
 import { useOsContext } from '@/context/OsContext';
 import Image from 'next/image';
 import { useThemeContext } from '@/context/ThemeContext';
-import { FaRegCopy } from 'react-icons/fa';
+import { FaGithub, FaRegCopy } from 'react-icons/fa';
 import { WindowHeader } from '@/components/os/windowOs/windowHeader';
+import Link from 'next/link';
 
 type VsCodeComponentProps = {
   toggleMaximize?: () => void;
@@ -60,7 +61,7 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
       <div className="flex flex-col h-full w-full text-xs md:text-sm">
         <div className="flex flex-1 rounded-br-xl">
           <div
-            className={`hidden sm:flex flex-col p-5 ${
+            className={`hidden sm:flex flex-col p-5 gap-10 ${
               theme === 'dark'
                 ? 'bg-gray-600 text-gray-300'
                 : 'bg-gray-950 text-gray-200'
@@ -71,6 +72,15 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
               }`}
               onClick={toggleSidebar}>
               <FaRegCopy />
+            </div>
+            <div
+              className={`text-xl cursor-pointer hover:${
+                theme === 'dark' ? 'text-gray-200' : 'text-gray-100'
+              }`}
+              onClick={toggleSidebar}>
+              <Link href={'https://github.com/Dongmoon29'} target="_blank">
+                <FaGithub />
+              </Link>
             </div>
           </div>
           {isSidebarOpen ? (

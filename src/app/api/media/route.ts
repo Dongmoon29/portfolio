@@ -5,7 +5,7 @@ import path from 'path';
 export const GET = async (req: NextRequest) => {
   const filename = req.nextUrl.searchParams.get('uri');
   if (!filename) {
-    return;
+    return new NextResponse('Bad Request', { status: 400 });
   }
 
   const filePath = path.resolve('./db', filename);

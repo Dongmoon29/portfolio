@@ -16,7 +16,7 @@ export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ file }) => {
   const [currentContents, setCurrentContents] = useState<
     string | { src: string } | undefined
   >(file?.content ?? undefined);
-  // for image, pdf, etc to store blob data
+  // for storing blob data
   const [mediaContent, setMediaContent] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -139,7 +139,7 @@ const EditorContent = ({
   if (!loading && mediaContent) {
     return (
       <iframe
-        className="w-full bg-inherit flex-1"
+        className="w-full h-full bg-inherit flex-1"
         src={mediaContent}
         title="vscode"
       />

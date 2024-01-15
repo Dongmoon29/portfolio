@@ -15,10 +15,10 @@
 ---
 
 ## Skills
-- 🌐 **Frontend:** JavaScript, Reactjs, CSS3, HTML5
-- 🔧 **Backend:** C#, SQL, Entity Framework
+- 🌐 **Frontend:** JavaScript,TypeScript, Reactjs, Redux, CSS3, HTML5
+- 🔧 **Backend:** C#, Entity Framework
 - 🗣 **Languages:** Korean (Native), English (Fluent)
-- 🛠 **Tools:** Git, Typescript
+- 🛠 **Tools:** Git, Typescript, SQL, MySql
 
 ---
 
