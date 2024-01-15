@@ -1,3 +1,22 @@
 {
-  "test": "test"
+  "technical_skills": {
+    "programming_languages": ["C#", "JavaScript", "TypeScript"],
+    "frameworks_and_libraries": [
+      "ReactJS",
+      ".NET",
+      "Entity Framework",
+      "StyledComponents",
+      "Redux"
+    ],
+    "testing_tools": ["nUnit, Jest"],
+    "version_control": ["GIT"],
+    "frontend_technologies": ["HTML", "CSS", "JQuery", "TypeScript", "ReactJs"],
+    "database_technologies": ["SQL"]
+  },
+  "soft_skills": [
+    "Problem Solving",
+    "Ownership",
+    "Team Collaboration",
+    "Adaptability"
+  ]
 }

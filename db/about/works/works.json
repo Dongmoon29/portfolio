@@ -1,0 +1,18 @@
+{
+  "work_experience": [
+    {
+      "company": "Konan Technology",
+      "location": "Seoul",
+      "position": "Technical Support Engineer",
+      "duration": "March 2021 - July 2021",
+      "description": "Worked on fixing search engine indexing problems with client databases, and frontend improvements using JQuery."
+    },
+    {
+      "company": "Monthio Aps",
+      "location": "Copenhagen",
+      "position": "Fullstack Developer",
+      "duration": "April 2022 - Dec 2023",
+      "description": "As a Fullstack Developer at Monthio Aps, I've honed my skills in frontend development using ReactJS, StyledComponents, and Redux. On the backend, I work with C# .NET, nUnit, and Entity Framework. This role has been instrumental in teaching me how to write clean, maintainable code and take ownership of projects from conception to deployment. My experience here has also involved effective collaboration with cross-functional teams and continuous learning and adaptation in a fast-paced environment."
+    }
+  ]
+}

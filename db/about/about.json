@@ -1,32 +1,12 @@
 {
-  "mobile": {
-    "ko-kr": {
-      "callingCode": "45",
-      "number": "81 65 59 23"
-    },
-    "da-dk": {
-      "callingCode": "82",
-      "number": "10-5519-2783"
-    }
-  },
-  "email": "ehdans04@gmail.com",
-  "currentBasedOn": {
-    "country": "Denmark",
-    "city": "Copenhagen"
-  },
-  "skills": {
-    "languages": [
-      { "id": "Korean", "proficiency": "native" },
-      { "id": "English", "proficiency": "professional" }
-    ],
-    "programmings": [
-      { "id": "JavaScript", "level": 5 },
-      { "id": "Typescript", "level": 5 },
-      { "id": "ReactJS", "level": 5 },
-      { "id": "NextJS", "level": 5 },
-      { "id": "CSS", "level": 5 },
-      { "id": "HTML", "level": 5 },
-      { "id": "Git", "level": 5 }
-    ]
-  }
+  "name": "Dongmoon Kim",
+  "professional_title": "Fullstack Developer",
+  "location": "Copenhagen, Denmark",
+  "summary": "Experienced Fullstack Developer with a demonstrated history of working in the information technology and services industry. Skilled in .NET, ReactJS, JavaScript, and C#. Strong engineering professional with a focus on creating efficient, scalable, and user-friendly applications. Passionate about clean code, problem-solving, and continuous learning in the ever-evolving field of technology.",
+  "professional_interests": [
+    "Web Application Development",
+    "Software Architecture",
+    "Emerging Technologies"
+  ],
+  "personal_statement": "Eager to embrace and learn new technologies, I am continuously seeking opportunities to expand my skill set and contribute to innovative projects in the tech industry."
 }
