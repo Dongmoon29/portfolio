@@ -1,3 +1,71 @@
+/* styles/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Base styles for markdown content */
+.markdown {
+  @apply p-4;
+}
+
+.markdown > :last-child {
+  @apply pb-10;
+}
+
+/* Light theme styles */
+.markdown h1 {
+  @apply text-3xl font-bold mb-4 text-gray-900;
+}
+
+.markdown h2 {
+  @apply text-2xl font-semibold mb-2 text-gray-800;
+}
+
+.markdown p {
+  @apply text-base text-gray-700 my-2;
+}
+
+.markdown a {
+  @apply text-blue-600 hover:text-blue-800 hover:underline;
+}
+
+.markdown ul {
+  @apply list-inside list-disc space-y-2;
+}
+
+.markdown code {
+  @apply bg-gray-100 text-sm p-1 rounded-md font-mono;
+}
+
+.markdown hr {
+  @apply my-4 border-gray-300;
+}
+
+/* Dark theme styles using the `dark:` variant */
+.dark.markdown h1 {
+  @apply text-white;
+}
+
+.dark.markdown h2 {
+  @apply text-white;
+}
+
+.dark.markdown p {
+  @apply text-white;
+}
+
+.dark.markdown a {
+  @apply text-blue-400 hover:text-blue-300;
+}
+
+.dark.markdown ul {
+  @apply list-inside list-disc space-y-2;
+}
+
+.dark.markdown code {
+  @apply bg-gray-700 text-gray-200 p-1 rounded-md font-mono;
+}
+
+.dark.markdown hr {
+  @apply border-gray-600;
+}
