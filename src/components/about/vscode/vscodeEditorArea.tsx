@@ -4,6 +4,7 @@ import { useThemeContext } from '@/context/ThemeContext';
 import { VsCodeFileType } from '@/types/vscodeTypes';
 import ReactMarkDown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import Image from 'next/image';
 
 type VsCodeEditorAreaProps = {
   file?: VsCodeFileType;
@@ -101,6 +102,24 @@ const EditorContent = ({
       return (
         <div className="h-full pb-20 overflow-auto">
           <ReactMarkDown
+            components={{
+              p: ({ node, children }) => {
+                if (node?.children[0]?.tagName === 'img') {
+                  return (
+                    <div className="flex justify-center items-center rounded-full mb-10">
+                      <Image
+                        className="rounded-full"
+                        src={`/dongmoon_kim.jpg`}
+                        alt={'alt'}
+                        width="300"
+                        height="300"
+                      />
+                    </div>
+                  );
+                }
+                return <p>{children}</p>;
+              },
+            }}
             className={`h-0 ${
               theme === 'dark' ? 'dark' : 'light'
             } markdown p-4`}

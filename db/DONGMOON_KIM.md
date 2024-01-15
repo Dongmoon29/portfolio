@@ -1,5 +1,5 @@
+![text](https://assets.digitalocean.com/articles/alligator/boo.svg "a title")
 # Dongmoon Kim - Software Developer
-
 
 ## Contact Information
 - **Location:** Copenhagen, Denmark

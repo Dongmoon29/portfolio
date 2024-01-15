@@ -66,7 +66,7 @@ const VsCodeFolder: FC<VsCodeFolderProps> = ({ folder, level }) => {
 
   return (
     <div
-      className={`cursor-pointer py-1`}
+      className={`cursor-pointer my-1`}
       style={{ paddingLeft: `${padding}px` }}
       onClick={handleToggle}>
       <div className="flex items-center gap-2 min-w-64">
@@ -126,7 +126,7 @@ const VsCodeFile: FC<VsCodeFileProps> = ({ file, level }) => {
 
   return (
     <div
-      className={`flex items-center gap-2 cursor-pointer ${
+      className={`my-1 flex items-center gap-2 cursor-pointer ${
         file.isActive
           ? theme === 'dark'
             ? 'border-2 border-white'
