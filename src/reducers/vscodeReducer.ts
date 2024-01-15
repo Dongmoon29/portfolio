@@ -69,10 +69,11 @@ export const vscodeReducer = (state = initialState, action) => {
     case 'INITIALIZE': {
       const { files, folders } = action.payload.data;
       const currentFile = getInitialCurrentFile(files, folders);
+      const activatedCurrentFile = { ...currentFile, isActive: true };
       return {
         ...state,
         currentFile,
-        buffers: [currentFile],
+        buffers: [activatedCurrentFile],
         fileExplorer: action.payload.data,
         files: setFileStore(files, folders),
       };
