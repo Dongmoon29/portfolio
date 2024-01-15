@@ -64,7 +64,9 @@ export const VscodeProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </VscodeContext.Provider>
   ) : (
-    <div>Loading...</div>
+    <div className="absolute top-1/2 left-1/2">
+      <span className="loading loading-dots loading-lg"></span>
+    </div>
   );
 };
 
