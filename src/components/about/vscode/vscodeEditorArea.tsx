@@ -64,15 +64,16 @@ export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ file }) => {
           className={`hidden ${
             theme === 'dark' ? 'bg-gray-700' : 'bg-gray-300'
           } sm:w-10`}></div>
-        <EditorContent
-          file={file}
-          currentContents={currentContents}
-          loading={loading}
-          mediaContent={mediaContent}
-          onChange={handleInputChange}
-        />
+        <div className="h-full w-full">
+          <EditorContent
+            file={file}
+            currentContents={currentContents}
+            loading={loading}
+            mediaContent={mediaContent}
+            onChange={handleInputChange}
+          />
+        </div>
       </div>
-      {error && <div className="text-red-500">{error}</div>}
     </div>
   );
 };
@@ -128,18 +129,21 @@ const EditorContent = ({
     }
 
     return (
-      <CodeEditor
-        value={currentContents}
-        language={file.filename.split('.').pop()}
-        onChange={(evn: any) => onChange(evn.target.value)}
-        padding={15}
-        data-color-mode={theme === 'dark' ? 'dark' : 'light'}
-        style={{
-          backgroundColor: theme === 'dark' ? 'rgb(17 24 39)' : '#fff',
-          fontFamily:
-            'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
-        }}
-      />
+      <div className="max-h-0">
+        <CodeEditor
+          value={currentContents}
+          language={file.filename.split('.').pop()}
+          onChange={(evn: any) => onChange(evn.target.value)}
+          padding={15}
+          data-color-mode={theme === 'dark' ? 'dark' : 'light'}
+          style={{
+            backgroundColor: theme === 'dark' ? 'rgb(17 24 39)' : '#fff',
+            fontFamily:
+              'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
+            overflow: 'auto',
+          }}
+        />
+      </div>
     );
   }
 
