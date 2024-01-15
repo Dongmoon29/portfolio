@@ -20,7 +20,7 @@ export const Console = () => {
     <div
       className={`hidden sm:block rounded-xl ${
         theme === 'light' ? 'bg-gray-100' : 'bg-gray-800'
-      } w-4/5 h-40 sm:h-60 md:h-96`}>
+      } w-4/5 lg:w-2/5 h-40 sm:h-60 md:h-96`}>
       {os === 'MacOs' ? (
         <OsxWindowHeader
           title="terminal"
@@ -37,7 +37,7 @@ export const Console = () => {
         <div
           className={` ${
             theme === 'light' ? 'text-gray-700' : 'text-gray-200'
-          } text-sm text-left`}>
+          } text-sm text-center`}>
           <span>$ {text}</span>
         </div>
       </div>

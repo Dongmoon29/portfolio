@@ -5,6 +5,7 @@ import { VsCodeFileType } from '@/types/vscodeTypes';
 import ReactMarkDown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Image from 'next/image';
+import CodeEditor from '@uiw/react-textarea-code-editor';
 
 type VsCodeEditorAreaProps = {
   file?: VsCodeFileType;
@@ -126,12 +127,25 @@ const EditorContent = ({
       );
     }
 
+    // return (
+    //   <textarea
+    //     className="p-3 w-full bg-inherit h-full resize-none focus:outline-none overflow-auto"
+    //     value={currentContents}
+    //     wrap="off"
+    //     onChange={onChange}
+    //   />
+    // );
     return (
-      <textarea
-        className="p-3 w-full bg-inherit h-full resize-none focus:outline-none overflow-auto"
+      <CodeEditor
         value={currentContents}
-        wrap="off"
-        onChange={onChange}
+        language={file.filename.split('.').pop()}
+        onChange={(evn: any) => onChange(evn.target.value)}
+        padding={15}
+        style={{
+          backgroundColor: theme === 'dark' ? '#000' : '#fff',
+          fontFamily:
+            'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
+        }}
       />
     );
   }

@@ -61,7 +61,7 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
       <div className="flex flex-col h-full w-full text-xs md:text-sm">
         <div className="flex flex-1 rounded-br-xl">
           <div
-            className={`hidden sm:flex flex-col p-5 gap-10 ${
+            className={`flex flex-col p-5 gap-10 ${
               theme === 'dark'
                 ? 'bg-gray-600 text-gray-300'
                 : 'bg-gray-950 text-gray-200'

@@ -45,7 +45,19 @@ export const FileIcon: FC<FileIconProps> = ({ filename, size }) => {
       </div>
     );
   }
-
+  if (filename.endsWith('.ts')) {
+    icon = (
+      <div className="min-w-4">
+        <Image
+          src={'/svgs/ts.svg'}
+          priority
+          height={size}
+          width={size}
+          alt="icon"
+        />
+      </div>
+    );
+  }
   if (filename.endsWith('.pdf')) {
     icon = (
       <div className="min-w-4">
