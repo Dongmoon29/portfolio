@@ -64,7 +64,7 @@ export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ file }) => {
           className={`hidden ${
             theme === 'dark' ? 'bg-gray-700' : 'bg-gray-300'
           } sm:w-10`}></div>
-        <div className="h-full w-full">
+        <div className="h-full w-full overflow-auto">
           <EditorContent
             file={file}
             currentContents={currentContents}
