@@ -9,7 +9,6 @@
   "libraries_and_tools": {
     "UI_enhancements": [
       "@uiw/react-textarea-code-editor",
-      "framer-motion",
       "react-icons",
       "react-markdown"
     ],
