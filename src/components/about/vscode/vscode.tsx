@@ -83,7 +83,9 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
                   theme === 'dark' ? 'text-gray-200' : 'text-gray-100'
                 } hover:scale-150 transition ease-in-out`}
                 onClick={toggleSidebar}>
-                <Link href={'https://github.com/Dongmoon29'} target="_blank">
+                <Link
+                  href={'https://github.com/Dongmoon29/portfolio'}
+                  target="_blank">
                   <FaGithub />
                 </Link>
               </div>
