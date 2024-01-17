@@ -27,7 +27,7 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
   const { state, dispatch } = useVscodeContext();
   const { os } = useOsContext();
   const { theme } = useThemeContext();
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useHotkeys('alt+w', () => {
     if (!state.currentFile) {

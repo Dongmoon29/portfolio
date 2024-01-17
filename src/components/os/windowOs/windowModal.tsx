@@ -83,7 +83,7 @@ export const Modal: FC<ModalProps> = ({ isOpen, onClose }) => {
                 height={32}
                 alt={'icon'}
               />
-              <span>{'Change OS'}</span>
+              <span className="text-center">{'Change OS'}</span>
             </div>
             <div
               className={`flex flex-col items-center md:justify-left  gap-2 cursor-pointer`}
@@ -96,7 +96,7 @@ export const Modal: FC<ModalProps> = ({ isOpen, onClose }) => {
                 height={32}
                 alt={'icon'}
               />
-              <span>Change theme</span>
+              <span className="text-center">Change theme</span>
             </div>
             <div
               className={`flex flex-col items-center md:justify-left gap-2 cursor-pointer`}
@@ -107,7 +107,7 @@ export const Modal: FC<ModalProps> = ({ isOpen, onClose }) => {
                 height={32}
                 alt={'icon'}
               />
-              <span>Resume</span>
+              <span className="text-center">Resume</span>
             </div>
           </div>
         </div>
