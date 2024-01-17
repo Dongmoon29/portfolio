@@ -59,10 +59,11 @@ const Intruduction = () => {
           <h1 className="text-center text-sm lg:text-3xl font-bold mb-3 lg:mb-10">
             Hi, I&apos;m Dongmoon Software dev
           </h1>
-          <p className="text-sm text-center ">
-            Welcome! I&apos;m Dongmoon, a software developer specializing in
-            crafting intuitive web experiences. Explore my work and the code
-            behind it.
+          <p className="text-sm ">
+            Welcome! I&apos;m Dongmoon, a software developer with a flair for
+            creating intuitive web experiences. Dive into my portfolio to
+            uncover the secrets behind my code and the passion in my projects.
+            Ready for a journey of discovery?
           </p>
         </div>
       </div>

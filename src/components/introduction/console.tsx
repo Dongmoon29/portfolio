@@ -20,7 +20,7 @@ export const Console = () => {
     <div
       className={`hidden lg:block rounded-xl ${
         theme === 'light' ? 'bg-gray-100' : 'bg-gray-800'
-      } w-4/5 lg:w-2/5 h-64`}>
+      } w-4/5 lg:w-2/5 h-64 xl:h-80`}>
       {os === 'MacOs' ? (
         <OsxWindowHeader
           title="terminal"
