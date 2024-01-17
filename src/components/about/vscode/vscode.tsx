@@ -13,6 +13,7 @@ import { FaGithub, FaRegCopy } from 'react-icons/fa';
 import { WindowHeader } from '@/components/os/windowOs/windowHeader';
 import Link from 'next/link';
 import { Tooltip } from '@/components/tooltip';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 type VsCodeComponentProps = {
   toggleMaximize?: () => void;
@@ -23,10 +24,17 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
   toggleMaximize,
   isMaximize,
 }) => {
-  const { state } = useVscodeContext();
+  const { state, dispatch } = useVscodeContext();
   const { os } = useOsContext();
   const { theme } = useThemeContext();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  useHotkeys('alt+w', () => {
+    if (!state.currentFile) {
+      return;
+    }
+    dispatch({ type: 'DELETE_BUFFER', payload: { id: state.currentFile.id } });
+  });
 
   const toggleSidebar = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();

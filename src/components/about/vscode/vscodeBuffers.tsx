@@ -3,7 +3,7 @@
 import { FileIcon } from '@/components/fileIcons/icons';
 import { useThemeContext } from '@/context/ThemeContext';
 import { useVscodeContext } from '@/context/VscodeContext';
-import { FC, MouseEventHandler } from 'react';
+import { FC, MouseEventHandler, useCallback } from 'react';
 
 export const VsCodeBuffers: FC = () => {
   const { state } = useVscodeContext();
@@ -41,15 +41,21 @@ const VsCodeBuffer: FC<VsCodeBufferProps> = ({ buffer }) => {
   const { dispatch } = useVscodeContext();
   const { theme } = useThemeContext();
 
-  const handleTabDeleteClick: MouseEventHandler<HTMLElement> = (event) => {
-    event.stopPropagation();
-    dispatch({ type: 'DELETE_BUFFER', payload: { id: buffer.id } });
-  };
+  const handleTabDeleteClick: MouseEventHandler<HTMLElement> = useCallback(
+    (event) => {
+      event.stopPropagation();
+      dispatch({ type: 'DELETE_BUFFER', payload: { id: buffer.id } });
+    },
+    [buffer.id, dispatch]
+  );
 
-  const handleTabClick: MouseEventHandler<HTMLElement> = (event) => {
-    event.stopPropagation();
-    dispatch({ type: 'SET_CURRENT_FILE', payload: { id: buffer.id } });
-  };
+  const handleTabClick: MouseEventHandler<HTMLElement> = useCallback(
+    (event) => {
+      event.stopPropagation();
+      dispatch({ type: 'SET_CURRENT_FILE', payload: { id: buffer.id } });
+    },
+    [dispatch, buffer.id]
+  );
 
   return (
     <div
