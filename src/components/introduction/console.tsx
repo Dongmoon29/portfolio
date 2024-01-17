@@ -18,9 +18,9 @@ export const Console = () => {
 
   return (
     <div
-      className={`hidden sm:block rounded-xl ${
+      className={`hidden lg:block rounded-xl ${
         theme === 'light' ? 'bg-gray-100' : 'bg-gray-800'
-      } w-4/5 lg:w-2/5 h-40 sm:h-60 md:h-96`}>
+      } w-4/5 lg:w-2/5 h-64`}>
       {os === 'MacOs' ? (
         <OsxWindowHeader
           title="terminal"

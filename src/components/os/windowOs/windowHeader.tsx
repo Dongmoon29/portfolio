@@ -17,7 +17,10 @@ export const WindowHeader: FC<WindowHeaderProps> = ({
   isMaximize,
 }) => {
   return (
-    <div className="grid grid-cols-3 justify-center items-center text-white bg-gray-700 rounded-none sm:rounded-t-xl p-2 h-10">
+    <div
+      className={`grid grid-cols-3 justify-center items-center text-white bg-gray-700 ${
+        isMaximize ? 'rounded-none' : 'sm:rounded-t-xl'
+      } p-2 h-10`}>
       <div>{icon ?? ''}</div>
       <div className="flex justify-center">
         <h1>{title}</h1>

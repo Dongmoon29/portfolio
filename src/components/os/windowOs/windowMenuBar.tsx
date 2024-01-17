@@ -3,9 +3,14 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { Modal } from './windowModal';
+import Link from 'next/link';
+import { useThemeContext } from '@/context/ThemeContext';
 
 export const WindowMenuBar = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const { theme, handleThemeToggle } = useThemeContext();
+
+  const newTheme = theme === 'dark' ? 'light' : 'dark';
 
   const openModal = () => {
     setModalOpen(true);
@@ -24,6 +29,11 @@ export const WindowMenuBar = () => {
         <Image src={'/svgs/windows.svg'} width={30} height={30} alt="icon" />
       </button>
       <div className="hover:scale-110 transition duration-200 ease-in-out cursor-pointer">
+        <Link href="/about">
+          <Image src={'/svgs/resume.svg'} width={30} height={30} alt="icon" />
+        </Link>
+      </div>
+      <div className="hover:scale-110 transition duration-200 ease-in-out cursor-pointer">
         <Image
           src={'/svgs/translation.svg'}
           width={30}
@@ -33,9 +43,6 @@ export const WindowMenuBar = () => {
       </div>
       <div className="hover:scale-110 transition duration-200 ease-in-out cursor-pointer">
         <Image src={'/svgs/email.svg'} width={30} height={30} alt="icon" />
-      </div>
-      <div className="hover:scale-110 transition duration-200 ease-in-out cursor-pointer">
-        <Image src={'/svgs/resume.svg'} width={30} height={30} alt="icon" />
       </div>
 
       {modalOpen && <Modal isOpen={modalOpen} onClose={closeModal} />}

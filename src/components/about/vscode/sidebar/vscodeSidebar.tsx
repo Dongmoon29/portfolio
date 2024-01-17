@@ -22,7 +22,7 @@ export const VscodeSidebar: FC<VscodeSidebarProps> = ({ toggleSidebar }) => {
     <div
       className={`hidden md:flex flex-col gap-2 md:w-1/6 p-5 ${
         theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'
-      }`}>
+      } resize-x overflow-auto`}>
       <div className="flex items-center justify-between">
         <h1 className="text-nowrap truncate">EXPLORER: PORTFOLIO</h1>
         <div

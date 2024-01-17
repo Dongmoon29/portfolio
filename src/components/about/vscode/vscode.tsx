@@ -12,6 +12,7 @@ import { useThemeContext } from '@/context/ThemeContext';
 import { FaGithub, FaRegCopy } from 'react-icons/fa';
 import { WindowHeader } from '@/components/os/windowOs/windowHeader';
 import Link from 'next/link';
+import { Tooltip } from '@/components/tooltip';
 
 type VsCodeComponentProps = {
   toggleMaximize?: () => void;
@@ -66,8 +67,8 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
               theme === 'dark'
                 ? 'bg-gray-600 text-gray-300'
                 : 'bg-gray-950 text-gray-200'
-            } rounded-bl-xl `}>
-            <div className="tooltip tooltip-right" data-tip="file explorer">
+            }`}>
+            <Tooltip title="file explorer" direction="right">
               <div
                 className={`text-xl cursor-pointer hover:${
                   theme === 'dark' ? 'text-gray-200' : 'text-gray-100'
@@ -75,10 +76,8 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
                 onClick={toggleSidebar}>
                 <FaRegCopy />
               </div>
-            </div>
-            <div
-              className="tooltip tooltip-right"
-              data-tip="portfolio repository">
+            </Tooltip>
+            <Tooltip title="portfolio repository" direction="right">
               <div
                 className={`text-xl cursor-pointer hover:${
                   theme === 'dark' ? 'text-gray-200' : 'text-gray-100'
@@ -88,7 +87,7 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
                   <FaGithub />
                 </Link>
               </div>
-            </div>
+            </Tooltip>
           </div>
           {isSidebarOpen ? (
             <VscodeSidebar toggleSidebar={toggleSidebar} />
