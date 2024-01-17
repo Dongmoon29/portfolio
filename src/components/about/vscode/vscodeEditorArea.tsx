@@ -112,8 +112,8 @@ const EditorContent = ({
                     className="rounded-full"
                     src={`/dongmoon_kim.jpg`}
                     alt={'alt'}
-                    width="300"
-                    height="300"
+                    width="250"
+                    height="250"
                   />
                 </div>
               ),

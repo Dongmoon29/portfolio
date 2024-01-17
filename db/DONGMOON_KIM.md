@@ -1,3 +1,4 @@
+![text](/dongmoon_kim.jpg "")
 # Dongmoon Kim - Software Developer
 
 ## Contact Information

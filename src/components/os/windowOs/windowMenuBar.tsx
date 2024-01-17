@@ -29,11 +29,6 @@ export const WindowMenuBar = () => {
         <Image src={'/svgs/windows.svg'} width={30} height={30} alt="icon" />
       </button>
       <div className="hover:scale-110 transition duration-200 ease-in-out cursor-pointer">
-        <Link href="/about">
-          <Image src={'/svgs/resume.svg'} width={30} height={30} alt="icon" />
-        </Link>
-      </div>
-      <div className="hover:scale-110 transition duration-200 ease-in-out cursor-pointer">
         <Image
           src={'/svgs/translation.svg'}
           width={30}
