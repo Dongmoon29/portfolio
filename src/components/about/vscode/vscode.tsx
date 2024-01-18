@@ -76,7 +76,7 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
                 ? 'bg-gray-600 text-gray-300'
                 : 'bg-gray-950 text-gray-200'
             }`}>
-            <Tooltip title="file explorer" direction="right">
+            <Tooltip title="file explorer">
               <div
                 className={`text-xl cursor-pointer hover:${
                   theme === 'dark' ? 'text-gray-200' : 'text-gray-100'
@@ -85,7 +85,7 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
                 <FaRegCopy />
               </div>
             </Tooltip>
-            <Tooltip title="portfolio repository" direction="right">
+            <Tooltip title="portfolio repository">
               <div
                 className={`text-xl cursor-pointer hover:${
                   theme === 'dark' ? 'text-gray-200' : 'text-gray-100'
