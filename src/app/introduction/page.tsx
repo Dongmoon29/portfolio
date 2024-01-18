@@ -25,7 +25,7 @@ const Intruduction = () => {
 
   return (
     <section
-      className={`flex-col pb-20 lg:pb-10 sm:gap-6 md:gap-9 lg:gap-14 flex items-center max-h-screen h-screen bg-gradient-to-r ${
+      className={`flex-col pb-32 lg:pb-10 sm:gap-9 md:gap-9 lg:gap-14 flex items-center max-h-screen h-screen bg-gradient-to-r ${
         theme === 'light'
           ? ' from-sky-200 to-sky-500'
           : 'from-sky-950 to-orange-900'
@@ -53,13 +53,13 @@ const Intruduction = () => {
           </div>
         </div>
         <div
-          className={`px-10 flex-col sm:w-3/6 w-full ${
+          className={`p-10 flex-col sm:w-3/6 w-full ${
             theme === 'dark' ? 'text-white' : 'text-gray-600'
           } `}>
-          <h1 className="text-center text-balance lg:text-3xl font-bold mb-3 lg:mb-10">
+          <h1 className="text-center text-sm lg:text-3xl font-bold mb-3 lg:mb-10">
             Hi, I&apos;m Dongmoon Software dev
           </h1>
-          <p className="text-sm px-4 sm:px-16">
+          <p className="text-sm ">
             Welcome! I&apos;m Dongmoon, a software developer with a flair for
             creating intuitive web experiences. Dive into my portfolio to
             uncover the secrets behind my code and the passion in my projects.
