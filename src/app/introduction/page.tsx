@@ -25,11 +25,11 @@ const Intruduction = () => {
 
   return (
     <section
-      className={`flex-col pb-32 lg:pb-10 sm:gap-9 md:gap-9 lg:gap-14 flex items-center max-h-screen h-screen bg-gradient-to-r ${
+      className={`flex-col pb-32 sm:pt-10 lg:pb-10 sm:gap-9 md:gap-9 lg:gap-14 flex items-center max-h-screen h-screen bg-gradient-to-r ${
         theme === 'light'
           ? ' from-sky-200 to-sky-500'
           : 'from-sky-950 to-orange-900'
-      } overflow-auto ${os === 'MacOs' ? '' : 'pt-20'}`}
+      } overflow-hidden ${os === 'MacOs' ? '' : 'pt-20'}`}
       id="introduction">
       {os === 'MacOs' ? <OsxMenuBar /> : null}
       <div
