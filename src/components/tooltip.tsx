@@ -3,11 +3,20 @@ import { FC } from 'react';
 type TooltipProps = {
   children: React.ReactNode;
   title: string;
+  direction?: 'top' | 'bottom' | 'left' | 'right';
 };
 
-export const Tooltip: FC<TooltipProps> = ({ children, title }) => {
+export const Tooltip: FC<TooltipProps> = ({
+  children,
+  title,
+  direction = 'right',
+}) => {
+  const tooltipClassName = direction
+    ? `tooltip tooltip-${direction}`
+    : 'tooltip';
+
   return (
-    <div className={'z-50 tooltip tooltip-right'} data-tip={`${title}`}>
+    <div className={tooltipClassName} data-tip={`${title}`}>
       {children}
     </div>
   );
