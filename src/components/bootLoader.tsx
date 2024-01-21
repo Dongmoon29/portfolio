@@ -26,9 +26,7 @@ export const BootLoader = () => {
 
   return (
     <div className="bg-black text-white font-mono text-xl w-screen h-screen flex flex-col justify-center items-center">
-      <h1 className="text-center">
-        Bootloader WIP: translation, auth, email features
-      </h1>
+      <h1 className="text-center">Bootloader</h1>
       <div className="p-4 w-3/4 h-3/4 border-4 border-white flex flex-col justify-between">
         <ul className="space-y-2">
           {osS.map((os, index) => {
