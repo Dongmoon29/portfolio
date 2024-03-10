@@ -129,7 +129,8 @@ const EditorContent = ({
     }
 
     return (
-      <div className="max-h-0">
+      // <div className="max-h-0">
+      <div className="h-full">
         <CodeEditor
           value={currentContents}
           language={file.filename.split('.').pop()}
@@ -141,6 +142,7 @@ const EditorContent = ({
             fontFamily:
               'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
             overflow: 'auto',
+            minHeight: '100%',
           }}
         />
       </div>
