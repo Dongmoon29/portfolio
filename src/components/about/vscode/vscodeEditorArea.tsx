@@ -56,13 +56,7 @@ export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ file }) => {
 
   return (
     <div
-      className={`${editorClassName} w-full flex-1 flex flex-col rounded-br-xl`}>
-      <div className="flex flex-1">
-        <div
-          className={`hidden ${
-            theme === 'dark' ? 'bg-gray-700' : 'bg-gray-300'
-          } sm:w-10`}></div>
-        <div className="h-full w-full overflow-auto">
+      className={`${editorClassName} flex-1 flex flex-col rounded-br-xl overflow-auto`}>
           <EditorContent
             file={file}
             currentContents={currentContents}
@@ -70,9 +64,7 @@ export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ file }) => {
             mediaContent={mediaContent}
             onChange={handleInputChange}
           />
-        </div>
-      </div>
-    </div>
+     </div>
   );
 };
 
@@ -127,12 +119,10 @@ const EditorContent = ({
     }
 
     return (
-      <div className="h-full bg-blue-100">
         <CodeEditor
           value={currentContents}
           language={file.filename.split('.').pop()}
           onChange={(evn: any) => onChange(evn.target.value)}
-          padding={15}
           data-color-mode={theme === 'dark' ? 'dark' : 'light'}
           style={{
             backgroundColor: theme === 'dark' ? 'rgb(17 24 39)' : '#fff',
@@ -142,7 +132,6 @@ const EditorContent = ({
             height: "100%"
           }}
         />
-      </div>
     );
   }
 
