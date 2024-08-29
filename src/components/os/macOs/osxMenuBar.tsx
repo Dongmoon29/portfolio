@@ -17,26 +17,10 @@ export const OsxMenuBar = () => {
     <div
       className={`flex items-center ${
         theme === 'dark' ? 'bg-gray-400' : 'bg-gray-200'
-      } text-black w-full px-3 py-1 text-xs sm:text-lg`}>
+      } text-black w-full px-3 py-2 text-xs sm:text-lg`}>
         <div tabIndex={0} role="button" className="mr-5">
           <FaApple />
         </div>
-
-      <div className="flex gap-5">
-        <div>
-          <span className="font-semibold">Dongmoon Kim</span>
-        </div>
-        <div>
-          <ul className="flex gap-3">
-            <li>
-              <Link href={'/introduction'}>Greeting</Link>
-            </li>
-            <li>
-              <Link href={'/about'}>About</Link>
-            </li>
-          </ul>
-        </div>
-      </div>
       {/* Toggle theme */}
       <div className="ml-auto cursor-pointer">
         {theme === 'dark' ? (

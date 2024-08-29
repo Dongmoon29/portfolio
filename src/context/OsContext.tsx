@@ -25,7 +25,7 @@ export const OsProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     setIsMounted(true);
     const storedOs = localStorage.getItem('os') ?? 'MacOs';
-    setOs(storedOs as 'MacOs' | 'Window');
+    setOs('MacOs');
   }, []);
 
   const handleOsToggle = (os: 'MacOs' | 'Window') => {
