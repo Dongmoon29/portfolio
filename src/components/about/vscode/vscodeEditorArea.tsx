@@ -119,6 +119,7 @@ const EditorContent = ({
     }
 
     return (
+      <div className={"h-full"}>
         <CodeEditor
           value={currentContents}
           language={file.filename.split('.').pop()}
@@ -128,10 +129,11 @@ const EditorContent = ({
             backgroundColor: theme === 'dark' ? 'rgb(17 24 39)' : '#fff',
             fontFamily:
               'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
-            overflow: 'auto',
+            overflow: 'hidden',
             height: "100%"
           }}
         />
+      </div>
     );
   }
 

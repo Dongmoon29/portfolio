@@ -24,6 +24,14 @@
 ---
 
 ## Professional Experience
+### Kross fnance Korea, Seoul
+#### Software Developer
+_April 2024 - Sep 2024_
+- Profciency in JavaScript/TypeScript Development: Expertise in building robust
+front-end and/or back-end p2p fntech.
+- Maintaining AWS infrastructure using Terraform.
+- P2P Fin-tech Sector Experience: Direct involvement in developing software
+solutions specifcally in lending/investment sector
 
 ### Konan Technology, Seoul
 #### Technical Support Engineer
@@ -33,10 +41,9 @@ _March 2021 - July 2021_
 
 ### Monthio Aps, Copenhagen
 #### Fullstack Developer
-_April 2022 - Present_
+_April 2022 - Nov 2023_
 - Focused on front-end development with ReactJS, including experience with StyledComponents and Redux.
 - Worked with C# .NET for backend development, proficient in nUnit and Entity Framework.
-
 ---
 
 ## Education
