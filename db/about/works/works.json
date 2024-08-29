@@ -13,6 +13,13 @@
       "position": "Fullstack Developer",
       "duration": "April 2022 - Dec 2023",
       "description": "As a Fullstack Developer at Monthio Aps, I've honed my skills in frontend development using ReactJS, StyledComponents, and Redux. On the backend, I work with C# .NET, nUnit, and Entity Framework. This role has been instrumental in teaching me how to write clean, maintainable code and take ownership of projects from conception to deployment. My experience here has also involved effective collaboration with cross-functional teams and continuous learning and adaptation in a fast-paced environment."
+    },
+    {
+      "company": "Kross Finance Korea",
+      "location": "Seoul",
+      "position": "Software Developer",
+      "duration": "March 2024 - Sep 2024",
+      "description": "Proficient in JavaScript/TypeScript development, with expertise in building robust front-end and back-end P2P fintech applications. Maintained AWS infrastructure using Terraform, ensuring reliable and scalable cloud environments. Directly involved in developing software solutions in the lending and investment sectors."
     }
   ]
 }
