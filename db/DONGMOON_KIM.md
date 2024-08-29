@@ -4,7 +4,7 @@
 ## Contact Information
 - **Location:** Copenhagen, Denmark
 - **Phone:** DK +45 81 65 59 23 KR +82 10 5519 2783
-- **Email:** [ehdans04@gmail.com](mailto:ehdans04@gmail.com)
+- **Email:** [dongmoonkim8@gmail.com](mailto:dongmoonkim8@gmail.com)
 - **GitHub:** [https://github.com/Dongmoon29](https://github.com/Dongmoon29/)
 - **Linkedin:** [www.linkedin.com/in/dongmoon-kim-144674198](www.linkedin.com/in/dongmoon-kim-144674198/)
 
