@@ -7,10 +7,8 @@ import { VsCodeBuffers } from './vscodeBuffers';
 import { VsCodeEditorArea } from './vscodeEditorArea';
 import { VscodeSidebar } from './sidebar/vscodeSidebar';
 import { useOsContext } from '@/context/OsContext';
-import Image from 'next/image';
 import { useThemeContext } from '@/context/ThemeContext';
 import { FaGithub, FaRegCopy } from 'react-icons/fa';
-import { WindowHeader } from '@/components/os/windowOs/windowHeader';
 import Link from 'next/link';
 import { Tooltip } from '@/components/tooltip';
 import { useHotkeys } from 'react-hotkeys-hook';
@@ -46,28 +44,11 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
       className={`flex flex-col ${
         theme === 'dark' ? 'text-white' : 'text-black'
       } h-full`}>
-      {os === 'MacOs' ? (
         <OsxWindowHeader
           title="editor"
           toggleMaximize={toggleMaximize}
           isMaximize={isMaximize}
         />
-      ) : (
-        <WindowHeader
-          isMaximize={isMaximize}
-          toggleMaximize={toggleMaximize}
-          title="editor"
-          icon={
-            <Image
-              src={'/svgs/vscode.svg'}
-              width={16}
-              height={16}
-              priority
-              alt="vscode"
-            />
-          }
-        />
-      )}
       <div className="flex flex-col h-full w-full text-xs md:text-sm">
         <div className="flex flex-1 rounded-br-xl">
           <div
@@ -76,7 +57,7 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
                 ? 'bg-gray-600 text-gray-300'
                 : 'bg-gray-950 text-gray-200'
             }`}>
-            <Tooltip title="file explorer" direction="right">
+            <Tooltip title="explorer" direction="bottom">
               <div
                 className={`text-xl cursor-pointer hover:${
                   theme === 'dark' ? 'text-gray-200' : 'text-gray-100'
@@ -85,7 +66,7 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
                 <FaRegCopy />
               </div>
             </Tooltip>
-            <Tooltip title="portfolio repository" direction="right">
+            <Tooltip title="Github" direction="right">
               <div
                 className={`text-xl cursor-pointer hover:${
                   theme === 'dark' ? 'text-gray-200' : 'text-gray-100'

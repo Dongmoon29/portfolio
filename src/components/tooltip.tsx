@@ -11,12 +11,10 @@ export const Tooltip: FC<TooltipProps> = ({
   title,
   direction = 'right',
 }) => {
-  const tooltipClassName = direction
-    ? `tooltip tooltip-${direction}`
-    : 'tooltip';
+  const tooltipClassName = `tooltip tooltip-${"bottom"}`
 
   return (
-    <div className={tooltipClassName} data-tip={`${title}`}>
+    <div className={tooltipClassName + "z-50"} data-tip={`${title}`}>
       {children}
     </div>
   );

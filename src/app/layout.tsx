@@ -3,6 +3,7 @@ import './globals.css';
 import { ThemeProvider } from '@/context/ThemeContext';
 import ThemeWrapper from '@/context/ThemeWrapper';
 import { OsProvider } from '@/context/OsContext';
+import { ReactNode } from 'react';
 
 export const metadata: Metadata = {
   title: "DM's portfolio",
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <html lang={'en'}>

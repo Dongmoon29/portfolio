@@ -18,19 +18,9 @@ export const OsxMenuBar = () => {
       className={`flex items-center ${
         theme === 'dark' ? 'bg-gray-400' : 'bg-gray-200'
       } text-black w-full px-3 py-1 text-xs sm:text-lg`}>
-      <div className="dropdown">
         <div tabIndex={0} role="button" className="mr-5">
           <FaApple />
         </div>
-
-        <ul
-          tabIndex={0}
-          className="dropdown-content z-[1] menu shadow bg-gray-300 w-52">
-          <li onClick={() => handleOsToggle(newOs)}>
-            <div>Change to {newOs}</div>
-          </li>
-        </ul>
-      </div>
 
       <div className="flex gap-5">
         <div>

@@ -13,11 +13,9 @@ type VsCodeEditorAreaProps = {
 
 export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ file }) => {
   const { theme } = useThemeContext();
-  // string or {src: string} that is not a text file
   const [currentContents, setCurrentContents] = useState<
     string | { src: string } | undefined
-  >(file?.content ?? undefined);
-  // for storing blob data
+  >(file?.content);
   const [mediaContent, setMediaContent] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -103,7 +101,7 @@ const EditorContent = ({
   if (typeof currentContents === 'string') {
     if (file.filename.endsWith('.md')) {
       return (
-        <div className="h-full pb-20 overflow-auto">
+        <div className="h-full overflow-auto">
           <ReactMarkDown
             components={{
               img: () => (
@@ -129,8 +127,7 @@ const EditorContent = ({
     }
 
     return (
-      // <div className="max-h-0">
-      <div className="h-full">
+      <div className="h-full bg-blue-100">
         <CodeEditor
           value={currentContents}
           language={file.filename.split('.').pop()}
@@ -142,7 +139,7 @@ const EditorContent = ({
             fontFamily:
               'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
             overflow: 'auto',
-            minHeight: '100%',
+            height: "100%"
           }}
         />
       </div>

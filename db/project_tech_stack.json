@@ -21,15 +21,5 @@
     "markdown_processing": ["remark-gfm"],
     "image_processing": ["sharp"],
     "miscellaneous": ["react-hotkeys-hook", "uuidv4"]
-  },
-  "development_tools": {
-    "typescript_support": [
-      "typescript",
-      "@types/node",
-      "@types/react",
-      "@types/react-dom"
-    ],
-    "linting_and_formatting": ["eslint", "eslint-config-next"],
-    "styling_tools": ["autoprefixer", "postcss"]
   }
 }
