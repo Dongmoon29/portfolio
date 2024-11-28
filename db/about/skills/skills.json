@@ -8,7 +8,7 @@
       "StyledComponents",
       "Redux"
     ],
-    "testing_tools": ["nUnit, Jest"],
+    "testing_tools": ["nUnit", "Jest"],
     "version_control": ["GIT"],
     "frontend_technologies": ["HTML", "CSS", "JQuery", "TypeScript", "ReactJs"],
     "database_technologies": ["SQL"]

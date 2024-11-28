@@ -2,8 +2,8 @@
 # Dongmoon Kim - Software Developer
 
 ## Contact Information
-- **Location:** Copenhagen, Denmark
-- **Phone:** DK +45 81 65 59 23 KR +82 10 5519 2783
+- **Location:** Seoul, South Korea
+- **Phone:** +82 10 5519 2783
 - **Email:** [dongmoonkim8@gmail.com](mailto:dongmoonkim8@gmail.com)
 - **GitHub:** [https://github.com/Dongmoon29](https://github.com/Dongmoon29/)
 - **Linkedin:** [www.linkedin.com/in/dongmoon-kim-144674198](www.linkedin.com/in/dongmoon-kim-144674198/)
@@ -11,13 +11,13 @@
 ---
 
 ## Profile
-👋 **Hello! I'm Dongmoon,** a dedicated and enthusiastic Fullstack Developer based in Copenhagen. I have a deep love for coding and enjoy every step of building software, from brainstorming ideas to deploying fully functional applications. My journey in software development has been diverse, spanning front-end magic with ReactJS to tackling complex back-end challenges in C# .NET. I thrive in environments where I can continually learn and apply new technologies, and I'm always ready for the next exciting project. Outside of coding, I enjoy exploring the vibrant city of Copenhagen, indulging in photography, and immersing myself in the world of tech podcasts.
+👋 **Hello! I'm Dongmoon,** a dedicated and enthusiastic Fullstack Developer based in Seoul. I have a deep love for coding and enjoy every step of building software, from brainstorming ideas to deploying fully functional applications. My journey in software development has been diverse, spanning front-end magic with ReactJS to tackling complex back-end challenges in C# .NET. I thrive in environments where I can continually learn and apply new technologies, and I'm always ready for the next exciting project. Outside of coding, I enjoy exploring the vibrant city of Copenhagen, indulging in photography, and immersing myself in the world of tech podcasts.
 
 ---
 
 ## Skills
 - 🌐 **Frontend:** JavaScript, TypeScript, Reactjs, Redux, Jest, CSS3, HTML5
-- 🔧 **Backend:** C#, Entity Framework, Xunit
+- 🔧 **Backend:** C#, Entity Framework, Xunit, NestJS
 - 🗣 **Languages:** Korean (Native), English (Fluent)
 - 🛠 **Tools:** Git, SQL
 
@@ -28,7 +28,7 @@
 #### Software Developer
 _April 2024 - Sep 2024_
 - Profciency in JavaScript/TypeScript Development: Expertise in building robust
-front-end and/or back-end p2p fntech.
+front-end and/or back-end p2p fintech.
 - Maintaining AWS infrastructure using Terraform.
 - P2P Fin-tech Sector Experience: Direct involvement in developing software
 solutions specifcally in lending/investment sector
