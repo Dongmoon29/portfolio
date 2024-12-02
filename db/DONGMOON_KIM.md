@@ -6,7 +6,7 @@
 - **Phone:** +82 10 5519 2783
 - **Email:** [dongmoonkim8@gmail.com](mailto:dongmoonkim8@gmail.com)
 - **GitHub:** [https://github.com/Dongmoon29](https://github.com/Dongmoon29/)
-- **Linkedin:** [www.linkedin.com/in/dongmoon-kim-144674198](www.linkedin.com/in/dongmoon-kim-144674198/)
+- **Linkedin:** [https://www.linkedin.com/in/dongmoon-kim-144674198/](https://www.linkedin.com/in/dongmoon-kim-144674198/)
 
 ---
 
