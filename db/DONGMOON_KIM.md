@@ -33,12 +33,6 @@ front-end and/or back-end p2p fintech.
 - P2P Fin-tech Sector Experience: Direct involvement in developing software
 solutions specifcally in lending/investment sector
 
-### Konan Technology, Seoul
-#### Technical Support Engineer
-_March 2021 - July 2021_
-- Worked on fixing search engine indexing problems and improved database performance.
-- Enhanced front-end features using JQuery.
-
 ### Monthio Aps, Copenhagen
 #### Fullstack Developer
 _April 2022 - Nov 2023_
