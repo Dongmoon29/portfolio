@@ -1,7 +1,9 @@
-![text](/dongmoon_kim.jpg "")
+![text](/dongmoon_kim.jpg)
+
 # Dongmoon Kim - Software Developer
 
 ## Contact Information
+
 - **Location:** Seoul, South Korea
 - **Phone:** +82 10 5519 2783
 - **Email:** [dongmoonkim8@gmail.com](mailto:dongmoonkim8@gmail.com)
@@ -11,11 +13,13 @@
 ---
 
 ## Profile
+
 👋 **Hello! I'm Dongmoon,** a dedicated and enthusiastic Fullstack Developer based in Seoul. I have a deep love for coding and enjoy every step of building software, from brainstorming ideas to deploying fully functional applications. My journey in software development has been diverse, spanning front-end magic with ReactJS to tackling complex back-end challenges in C# .NET. I thrive in environments where I can continually learn and apply new technologies, and I'm always ready for the next exciting project. Outside of coding, I enjoy exploring the vibrant city of Copenhagen, indulging in photography, and immersing myself in the world of tech podcasts.
 
 ---
 
 ## Skills
+
 - 🌐 **Frontend:** JavaScript, TypeScript, Reactjs, Redux, Jest, CSS3, HTML5
 - 🔧 **Backend:** C#, Entity Framework, Xunit, NestJS
 - 🗣 **Languages:** Korean (Native), English (Fluent)
@@ -24,27 +28,50 @@
 ---
 
 ## Professional Experience
+
 ### Kross fnance Korea, Seoul
+
 #### Software Developer
+
 _April 2024 - Sep 2024_
+
 - Profciency in JavaScript/TypeScript Development: Expertise in building robust
-front-end and/or back-end p2p fintech.
+  front-end and/or back-end p2p fintech.
 - Maintaining AWS infrastructure using Terraform.
 - P2P Fin-tech Sector Experience: Direct involvement in developing software
-solutions specifcally in lending/investment sector
+  solutions specifcally in lending/investment sector
 
 ### Monthio Aps, Copenhagen
+
 #### Fullstack Developer
+
 _April 2022 - Nov 2023_
+
 - Focused on front-end development with ReactJS, including experience with StyledComponents and Redux.
 - Worked with C# .NET for backend development, proficient in nUnit and Entity Framework.
+
 ---
 
 ## Education
 
 ### BA in Engineering
+
 _Seoul Digital University, Seoul_  
 **GPA:** 3.92/4.5
 
 ### Codestates Blockchain Bootcamp
+
 _September 2021 - December 2021_
+
+---
+
+## Side Projects
+
+### CodeRacer - Real-time Coding Competition Platform
+
+A real-time coding competition platform where users can improve their skills and compete with friends by solving coding problems together. Built with Next.js, Go, and WebSocket for real-time features.
+
+- [Live Demo](https://code-racer-pi.vercel.app/)
+- [GitHub Repository](https://github.com/Dongmoon29/code_racer)
+- **Tech Stack:** Next.js, React, TypeScript, Go, PostgreSQL, Redis, Docker
+- **Key Features:** Real-time coding competitions, multiple language support, LeetCode-style problems
