@@ -56,15 +56,16 @@ export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ file }) => {
 
   return (
     <div
-      className={`${editorClassName} flex-1 flex flex-col rounded-br-xl overflow-auto`}>
-          <EditorContent
-            file={file}
-            currentContents={currentContents}
-            loading={loading}
-            mediaContent={mediaContent}
-            onChange={handleInputChange}
-          />
-     </div>
+      className={`${editorClassName} flex-1 flex flex-col rounded-br-xl overflow-auto`}
+    >
+      <EditorContent
+        file={file}
+        currentContents={currentContents}
+        loading={loading}
+        mediaContent={mediaContent}
+        onChange={handleInputChange}
+      />
+    </div>
   );
 };
 
@@ -111,7 +112,8 @@ const EditorContent = ({
             className={`h-0 ${
               theme === 'dark' ? 'dark' : 'light'
             } markdown p-4`}
-            remarkPlugins={[remarkGfm]}>
+            remarkPlugins={[remarkGfm]}
+          >
             {currentContents}
           </ReactMarkDown>
         </div>
@@ -119,20 +121,23 @@ const EditorContent = ({
     }
 
     return (
-      <div className={"h-full"}>
-        <CodeEditor
-          value={currentContents}
-          language={file.filename.split('.').pop()}
-          onChange={(evn: any) => onChange(evn.target.value)}
-          data-color-mode={theme === 'dark' ? 'dark' : 'light'}
-          style={{
-            backgroundColor: theme === 'dark' ? 'rgb(17 24 39)' : '#fff',
-            fontFamily:
-              'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
-            overflow: 'hidden',
-            height: "100%"
-          }}
-        />
+      <div className="h-full w-full relative">
+        <div className="absolute inset-0 overflow-auto">
+          <CodeEditor
+            value={currentContents}
+            language={file.filename.split('.').pop()}
+            onChange={(evn: any) => onChange(evn.target.value)}
+            data-color-mode={theme === 'dark' ? 'dark' : 'light'}
+            style={{
+              backgroundColor: theme === 'dark' ? 'rgb(17 24 39)' : '#fff',
+              fontFamily:
+                'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
+              fontSize: '14px',
+              lineHeight: '1.5',
+              padding: '15px',
+            }}
+          />
+        </div>
       </div>
     );
   }
