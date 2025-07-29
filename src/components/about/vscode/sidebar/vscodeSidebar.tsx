@@ -22,12 +22,14 @@ export const VscodeSidebar: FC<VscodeSidebarProps> = ({ toggleSidebar }) => {
     <div
       className={`absolute z-40 h-full sm:static sm:flex flex-col gap-2 md:w-1/5 p-5 ${
         theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'
-      } resize-x overflow-auto`}>
+      } resize-x overflow-auto`}
+    >
       <div className="flex items-center justify-between">
         <h1 className="text-nowrap truncate">EXPLORER: PORTFOLIO</h1>
         <div
           onClick={(event: MouseEvent<HTMLDivElement>) => toggleSidebar(event)}
-          className={'cursor-pointer'}>
+          className={'cursor-pointer'}
+        >
           <MdClose />
         </div>
       </div>
@@ -59,6 +61,7 @@ type VsCodeFolderProps = {
 const VsCodeFolder: FC<VsCodeFolderProps> = ({ folder, level }) => {
   const { dispatch } = useVscodeContext();
   const id = useId();
+
   const handleToggle: MouseEventHandler<HTMLElement> = (event) => {
     event.stopPropagation();
     dispatch({ type: 'TOGGLE_FOLDER', payload: { id: folder.id } });
@@ -70,7 +73,8 @@ const VsCodeFolder: FC<VsCodeFolderProps> = ({ folder, level }) => {
     <div
       className={`cursor-pointer my-1`}
       style={{ paddingLeft: `${padding}px` }}
-      onClick={handleToggle}>
+      onClick={handleToggle}
+    >
       <div className="flex items-center gap-2 min-w-64">
         {folder.isActive ? (
           <div className="flex justify-center items-center gap-2">
@@ -116,7 +120,7 @@ const VsCodeFile: FC<VsCodeFileProps> = ({ file, level }) => {
   const { dispatch } = useVscodeContext();
   const { theme } = useThemeContext();
 
-  const handleFileClick = (event: any) => {
+  const handleFileClick = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
     dispatch({
       type: 'SET_CURRENT_FILE',
@@ -138,7 +142,8 @@ const VsCodeFile: FC<VsCodeFileProps> = ({ file, level }) => {
       
       `}
       style={{ paddingLeft: `${padding}px` }}
-      onClick={handleFileClick}>
+      onClick={handleFileClick}
+    >
       <span>{<FileIcon filename={file.filename} size={16} />}</span>
       <span className="truncate">{file.filename}</span>
     </div>
