@@ -12,6 +12,7 @@ import { FaGithub, FaRegCopy } from 'react-icons/fa';
 import Link from 'next/link';
 import { Tooltip } from '@/components/tooltip';
 import { useHotkeys } from 'react-hotkeys-hook';
+import { KEYBOARD_SHORTCUTS } from '@/utils/constants';
 
 type VsCodeComponentProps = {
   toggleMaximize?: () => void;
@@ -27,12 +28,19 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
   const { theme } = useThemeContext();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  useHotkeys('alt+w', () => {
-    if (!state.currentFile) {
-      return;
-    }
-    dispatch({ type: 'DELETE_BUFFER', payload: { id: state.currentFile.id } });
-  });
+  useHotkeys(
+    KEYBOARD_SHORTCUTS.CLOSE_TAB,
+    () => {
+      if (!state.currentFile) {
+        return;
+      }
+      dispatch({
+        type: 'DELETE_BUFFER',
+        payload: { id: state.currentFile.id },
+      });
+    },
+    { enableOnFormTags: true }
+  );
 
   const toggleSidebar = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
@@ -43,12 +51,13 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
     <div
       className={`flex flex-col ${
         theme === 'dark' ? 'text-white' : 'text-black'
-      } h-full`}>
-        <OsxWindowHeader
-          title="editor"
-          toggleMaximize={toggleMaximize}
-          isMaximize={isMaximize}
-        />
+      } h-full rounded-2xl overflow-hidden`}
+    >
+      <OsxWindowHeader
+        title="about me"
+        toggleMaximize={toggleMaximize}
+        isMaximize={isMaximize}
+      />
       <div className="flex flex-col h-full w-full text-xs md:text-sm">
         <div className="flex flex-1 rounded-br-xl">
           <div
@@ -56,13 +65,15 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
               theme === 'dark'
                 ? 'bg-gray-600 text-gray-300'
                 : 'bg-gray-950 text-gray-200'
-            }`}>
+            }`}
+          >
             <Tooltip title="explorer" direction="bottom">
               <div
                 className={`text-xl cursor-pointer hover:${
                   theme === 'dark' ? 'text-gray-200' : 'text-gray-100'
                 } hover:scale-150 transition ease-in-out`}
-                onClick={toggleSidebar}>
+                onClick={toggleSidebar}
+              >
                 <FaRegCopy />
               </div>
             </Tooltip>
@@ -71,10 +82,13 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
                 className={`text-xl cursor-pointer hover:${
                   theme === 'dark' ? 'text-gray-200' : 'text-gray-100'
                 } hover:scale-150 transition ease-in-out`}
-                onClick={toggleSidebar}>
+                onClick={toggleSidebar}
+              >
                 <Link
                   href={'https://github.com/Dongmoon29/portfolio'}
-                  target="_blank">
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <FaGithub />
                 </Link>
               </div>
@@ -86,7 +100,8 @@ const VsCodeComponent: FC<VsCodeComponentProps> = ({
           <div
             className={`flex flex-col w-full ${
               theme === 'dark' ? 'bg-gray-800' : 'bg-gray-200'
-            } overflow-auto`}>
+            } overflow-auto`}
+          >
             <VsCodeBuffers />
             <VsCodeEditorArea file={state.currentFile} />
           </div>
