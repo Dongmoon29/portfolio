@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 const words = [
   'Hello, wonderful people.',
@@ -7,14 +7,27 @@ const words = [
   'May your day be filled with joy and success.',
   'Take a moment to enjoy the little things today.',
   'Keep smiling and carry on with positivity.',
-];
+] as const;
+
+const TYPING_DELAY = 120;
+const RESET_DELAY = 1000;
 
 export const useTypingEffect = () => {
-  const initialIndex = 0;
-  const typingDelay = 120;
-  const resetDelay = 1000;
   const [text, setText] = useState('');
-  const [wordIndex, setWordIndex] = useState(initialIndex);
+  const [wordIndex, setWordIndex] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const wordIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  const clearIntervals = useCallback(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+    if (wordIntervalRef.current) {
+      clearInterval(wordIntervalRef.current);
+      wordIntervalRef.current = null;
+    }
+  }, []);
 
   useEffect(() => {
     let letterCount = 1;
@@ -38,25 +51,40 @@ export const useTypingEffect = () => {
           setTimeout(() => {
             resetTyping();
             waiting = false;
-          }, resetDelay);
+          }, RESET_DELAY);
         } else {
           typeLetter();
         }
       }
     };
 
-    const textInterval = setInterval(updateText, typingDelay);
+    intervalRef.current = setInterval(updateText, TYPING_DELAY);
 
-    return () => clearInterval(textInterval);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
   }, [wordIndex]);
 
   useEffect(() => {
     const wordInterval = setInterval(() => {
       setWordIndex((prevIndex) => (prevIndex + 1) % words.length);
-    }, resetDelay + typingDelay * words[wordIndex].length);
+    }, RESET_DELAY + TYPING_DELAY * words[wordIndex].length);
 
-    return () => clearInterval(wordInterval);
-  }, [wordIndex, resetDelay, typingDelay]);
+    wordIntervalRef.current = wordInterval;
+
+    return () => {
+      if (wordIntervalRef.current) {
+        clearInterval(wordIntervalRef.current);
+      }
+    };
+  }, [wordIndex]);
+
+  // 컴포넌트 언마운트 시 인터벌 정리
+  useEffect(() => {
+    return clearIntervals;
+  }, [clearIntervals]);
 
   return text;
 };
