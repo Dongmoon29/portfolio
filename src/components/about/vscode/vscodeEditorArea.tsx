@@ -6,6 +6,12 @@ import ReactMarkDown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Image from 'next/image';
 import CodeEditor from '@uiw/react-textarea-code-editor';
+import { API_ENDPOINTS } from '@/utils/constants';
+import {
+  getLanguageFromFilename,
+  isMarkdownFile,
+  isPdfFile,
+} from '@/utils/fileUtils';
 
 type VsCodeEditorAreaProps = {
   file?: VsCodeFileType;
@@ -19,28 +25,31 @@ export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ file }) => {
   const [mediaContent, setMediaContent] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  console.log(API_ENDPOINTS.MEDIA);
 
   useEffect(() => {
     setCurrentContents(file?.content);
+    setError(null);
   }, [file]);
 
   useEffect(() => {
     const fetchMediaContent = async (currentContents: { src: string }) => {
       try {
-        const response = await fetch(`/api/media?uri=${currentContents.src}`);
-        if (!response.ok)
-          throw new Error(`Error fetching content: ${response.statusText}`);
-        const blob = await response.blob();
-        setMediaContent(URL.createObjectURL(blob));
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
+        setLoading(true);
+        setError(null);
+
+        const fullUrl = `${window.location.origin}${API_ENDPOINTS.MEDIA}?uri=${currentContents.src}`;
+        console.log('fullUrl ==> , ', fullUrl);
+        setMediaContent(fullUrl);
+        setLoading(false);
+      } catch (err: unknown) {
+        console.error('Media fetch error:', err);
+        setError(err instanceof Error ? err.message : 'Failed to load media');
         setLoading(false);
       }
     };
 
     if (currentContents && typeof currentContents !== 'string') {
-      setLoading(true);
       fetchMediaContent(currentContents);
     }
   }, [currentContents]);
@@ -54,9 +63,22 @@ export const VsCodeEditorArea: FC<VsCodeEditorAreaProps> = ({ file }) => {
     [theme]
   );
 
+  if (error) {
+    return (
+      <div
+        className={`${editorClassName} flex-1 flex flex-col overflow-auto p-4`}
+      >
+        <div className="text-red-500 text-center">
+          <p className="font-semibold">Error loading content</p>
+          <p className="text-sm">{error}</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
-      className={`${editorClassName} flex-1 flex flex-col rounded-br-xl overflow-auto`}
+      className={`${editorClassName} flex-1 flex flex-col overflow-auto rounded-r-xl`}
     >
       <EditorContent
         file={file}
@@ -83,16 +105,25 @@ const EditorContent = ({
   currentContents?: string | { src: string };
 }) => {
   const { theme } = useThemeContext();
+
   if (!file || !currentContents) {
     return (
-      <div>
-        <h1>no content</h1>
+      <div className="flex items-center justify-center h-full">
+        <p className="text-gray-500">No content to display</p>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="loading loading-spinner loading-lg"></div>
       </div>
     );
   }
 
   if (typeof currentContents === 'string') {
-    if (file.filename.endsWith('.md')) {
+    if (isMarkdownFile(file.filename)) {
       return (
         <div className="h-full overflow-auto">
           <ReactMarkDown
@@ -101,10 +132,11 @@ const EditorContent = ({
                 <div className="flex justify-center items-center rounded-full mb-10">
                   <Image
                     className="rounded-full"
-                    src={`/dongmoon_kim.jpg`}
-                    alt={'alt'}
-                    width="250"
-                    height="250"
+                    src="/dongmoon_kim.jpg"
+                    alt="Dongmoon Kim"
+                    width={250}
+                    height={250}
+                    priority
                   />
                 </div>
               ),
@@ -120,13 +152,15 @@ const EditorContent = ({
       );
     }
 
+    const language = getLanguageFromFilename(file.filename);
+
     return (
       <div className="h-full w-full relative">
         <div className="absolute inset-0 overflow-auto">
           <CodeEditor
             value={currentContents}
-            language={file.filename.split('.').pop()}
-            onChange={(evn: any) => onChange(evn.target.value)}
+            language={language}
+            onChange={(evn: ChangeEvent<HTMLTextAreaElement>) => onChange(evn)}
             data-color-mode={theme === 'dark' ? 'dark' : 'light'}
             style={{
               backgroundColor: theme === 'dark' ? 'rgb(17 24 39)' : '#fff',
@@ -143,14 +177,39 @@ const EditorContent = ({
   }
 
   if (!loading && mediaContent) {
+    // PDF 파일인 경우
+    if (isPdfFile(file.filename)) {
+      return (
+        <div className="w-full h-full flex flex-col">
+          <iframe
+            className="w-full h-full bg-inherit flex-1"
+            src={mediaContent}
+            title="PDF content"
+            allow="fullscreen"
+            allowFullScreen
+          />
+        </div>
+      );
+    }
+
+    // 이미지 파일인 경우
     return (
-      <iframe
-        className="w-full h-full bg-inherit flex-1"
-        src={mediaContent}
-        title="vscode"
-      />
+      <div className="w-full h-full flex items-center justify-center">
+        <img
+          src={mediaContent}
+          alt={file.filename}
+          className="max-w-full max-h-full object-contain"
+          onError={(e) => {
+            console.error('Image failed to load:', e);
+          }}
+        />
+      </div>
     );
   }
 
-  return null;
+  return (
+    <div className="flex items-center justify-center h-full">
+      <p className="text-gray-500">Unable to display content</p>
+    </div>
+  );
 };
