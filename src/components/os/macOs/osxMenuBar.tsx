@@ -16,12 +16,12 @@ export const OsxMenuBar = () => {
   return (
     <div
       className={`flex items-center ${
-        theme === 'dark' ? 'bg-gray-400' : 'bg-gray-200'
-      } text-black w-full px-3 py-2 text-xs sm:text-lg`}>
-        <div tabIndex={0} role="button" className="mr-5">
-          <FaApple />
-        </div>
-      {/* Toggle theme */}
+        theme === 'dark' ? 'bg-gray-950 text-white' : 'bg-gray-200 text-black'
+      }  w-full px-8 py-2 text-sm sm:text-lg`}
+    >
+      <div tabIndex={0} role="button" className="mr-5">
+        <FaApple />
+      </div>
       <div className="ml-auto cursor-pointer">
         {theme === 'dark' ? (
           <IoMdMoon onClick={() => handleThemeToggle('light')} />
