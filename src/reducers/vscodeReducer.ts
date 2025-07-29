@@ -75,11 +75,11 @@ const setFileStore = (files: VsCodeFileType[], folders: VsCodeFolderType[]) => [
   ...files,
   ...collectFiles(folders),
 ];
-// @ts-ignore
+
 export const vscodeReducer: Reducer<VsCodeState, VsCodeActions> = (
-  state = initialState,
-  action
-) => {
+  state: VsCodeState = initialState,
+  action: VsCodeActions
+): VsCodeState => {
   switch (action.type) {
     case 'INITIALIZE': {
       const { files, folders } = action.payload.data;
@@ -113,7 +113,7 @@ export const vscodeReducer: Reducer<VsCodeState, VsCodeActions> = (
         currentFile: newCurrentFile,
         buffers: state.buffers.some((buffer) => buffer.id === fileId)
           ? updatedBuffers
-          : [bufferToAdd]
+          : bufferToAdd
           ? [...updatedBuffers, bufferToAdd]
           : updatedBuffers,
         fileExplorer: {
